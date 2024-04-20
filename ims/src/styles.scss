@@ -1,5 +1,24 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-.toolbar-spacer {
+.footer-toolbar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 15px;
+}
+
+.spacer {
     flex: 1 1 auto;
 }
+
+.smallSpacer {
+    margin-right: 25px;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
