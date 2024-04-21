@@ -1,0 +1,27 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .form-field {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // Creates two columns
+    gap: 20px; // Adds space between the columns
+    max-width: 720px; // Adjust based on your preference
+    width: 100%;
+  }
+  
+  .field-container {
+    display: flex;
+    flex-direction: column; // Keep label on top of the field
+    align-items: stretch;
+  }
+  
+  mat-form-field {
+    width: 100%; // Ensures form field uses all available space
+  }
+  
