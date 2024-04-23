@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { HttpServiceService } from '../service/http/http-service.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -28,7 +29,11 @@ import { HttpClientModule } from '@angular/common/http';
 export class RegisterComponent {
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private httpService: HttpServiceService) {}
+  constructor(
+    private fb: FormBuilder, 
+    private httpService: HttpServiceService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -47,6 +52,7 @@ export class RegisterComponent {
       this.httpService.postData('users',this.registerForm.value).subscribe({
       next: (data) => {
         console.log('Data received:', data);
+        this.router.navigate(['/frontpage']); 
       },
       error: (error) => {
         console.error('Failed to fetch data', error);

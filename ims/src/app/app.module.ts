@@ -8,10 +8,12 @@ import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { UserFrontComponent } from './user-front/user-front.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    UserFrontComponent,
   ],
   imports: [
     BrowserModule,
