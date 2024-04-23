@@ -9,3 +9,8 @@
     right: 10px;
     top: 54px; 
 }
+
+:host {
+    display: block;
+    height: 60px; /* or whatever height you want */
+}

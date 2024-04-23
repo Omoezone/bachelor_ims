@@ -9,12 +9,15 @@ import { FooterComponent } from './footer/footer.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { UserFrontComponent } from './user-front/user-front.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutServerModule } from '@angular/flex-layout/server';
+import { CollectionModalComponent } from './collection-modal/collection-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserFrontComponent,
-  ],
+    CollectionModalComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,6 +25,9 @@ import { UserFrontComponent } from './user-front/user-front.component';
     RegisterComponent,
     FooterComponent,
     FrontpageComponent, 
+    UserFrontComponent,
+    FlexLayoutModule,
+    FlexLayoutServerModule
   ],
   providers: [
     provideClientHydration(),
