@@ -11,12 +11,11 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { UserFrontComponent } from './user-front/user-front.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FlexLayoutServerModule } from '@angular/flex-layout/server';
-import { CollectionModalComponent } from './collection-modal/collection-modal.component';
+import { CreateCollectionComponent } from './create-collection/create-collection.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CollectionModalComponent,
+    AppComponent
     ],
   imports: [
     BrowserModule,
@@ -27,7 +26,8 @@ import { CollectionModalComponent } from './collection-modal/collection-modal.co
     FrontpageComponent, 
     UserFrontComponent,
     FlexLayoutModule,
-    FlexLayoutServerModule
+    FlexLayoutServerModule,
+    CreateCollectionComponent
   ],
   providers: [
     provideClientHydration(),

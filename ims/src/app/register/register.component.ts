@@ -45,7 +45,7 @@ export class RegisterComponent {
       gender: ['', Validators.required]
     });
   }
-
+ 
   onSubmit() {
     if (this.registerForm.valid) {
       console.log('Form Submitted', this.registerForm.value);

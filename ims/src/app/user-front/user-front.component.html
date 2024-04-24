@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
     <div fxLayout="row" fxLayoutGap="80px" fxLayoutAlign="center center" style="margin-bottom: 40px;">
-        <button mat-raised-button color="primary" click="newCollection()">Create new collection</button>
+        <button mat-raised-button color="primary" (click)="newCollection()">Create new collection</button>
         <button mat-raised-button color="primary">View all items</button>
     </div>
 
@@ -15,7 +15,7 @@
 
             <ng-container matColumnDef="amountItems">
                 <mat-header-cell *matHeaderCellDef> Amount of items </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.amountItems}} </mat-cell>
+                <mat-cell *matCellDef="let element"> {{element.itemCount}} </mat-cell>
             </ng-container>
             
             <ng-container matColumnDef="actions">
@@ -24,7 +24,7 @@
                     <button mat-icon-button (click)="viewDetails(element)" aria-label="View details">
                         <mat-icon>visibility</mat-icon>
                     </button>
-                    <button mat-icon-button color="warn" (click)="deleteElement(element)" aria-label="Delete">
+                    <button mat-icon-button color="warn" (click)="deleteCollection(element)" aria-label="Delete">
                         <mat-icon>close</mat-icon>
                     </button>
                 </mat-cell>

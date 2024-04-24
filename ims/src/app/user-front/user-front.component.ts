@@ -6,7 +6,9 @@ import {MatButtonModule} from '@angular/material/button';
 import { HttpServiceService } from '../service/http/http-service.service';
 import { UserService } from '../service/userStorage/user.service';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { CreateCollectionComponent } from '../create-collection/create-collection.component';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-front',
@@ -17,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     CommonModule,
     MatIconModule,
+    MatDialogModule
   ],
   templateUrl: './user-front.component.html',
   styleUrl: './user-front.component.scss'
@@ -27,7 +30,8 @@ export class UserFrontComponent {
   userId: any;
   constructor(
     private http: HttpServiceService,
-    private userService: UserService
+    private userService: UserService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -37,16 +41,34 @@ export class UserFrontComponent {
     this.http.getUserCollections(`users/${this.userId}/collections`).subscribe({
       next: (data: any) => {
         this.dataSource = data
-        console.log("data: ", data)
+        console.log("data: ", this.dataSource)
       },
       error: (error: any) => console.error('There was an error!', error)
     });
   }
   newCollection() {
-    this.http.postCollection(`users/${this.userId}/collections`, {name: 'New Collection'}).subscribe({
+    const dialogRef = this.dialog.open(CreateCollectionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const params = new HttpParams().set('userId', this.userId.toString());
+        this.http.postCollection(`collections`, {"name": result}, params).subscribe({
+          next: (data: any) => {
+            console.log("data: ", data)
+            this.dataSource = [...this.dataSource, data];
+          },
+          error: (error: any) => console.error('There was an error!', error)
+        });
+      }
+    });
+  }
+  deleteCollection(collection: any) {
+    this.http.deleteCollection(`collections/${collection.collectionId}`).subscribe({
       next: (data: any) => {
         console.log("data: ", data)
-        this.dataSource.push(data)
+        this.dataSource = this.dataSource.filter((element: any) => element.id !== collection.id);
       },
       error: (error: any) => console.error('There was an error!', error)
     });
@@ -62,8 +84,3 @@ export class UserFrontComponent {
     console.log('Delete', element);
   }
 }
-
-const data = [
-  {name: 'Hydrogen', amountItems: 1079},
-  // More data...
-];

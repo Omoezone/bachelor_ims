@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Create New Collection</h2>
+<mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Collection Name</mat-label>
+    <input matInput [(ngModel)]="collectionName">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="collectionName" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

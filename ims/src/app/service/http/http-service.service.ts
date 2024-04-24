@@ -25,10 +25,16 @@ export class HttpServiceService {
       catchError(this.handleError) 
     );  
   }
-  postCollection(url: string, data: any): Observable<any> {
-    return this.http.post("/api/" + url, data).pipe(
+
+  postCollection(url: string, data: any, params: any): Observable<any> {
+    return this.http.post("/api/" + url, data, { params }).pipe(
       catchError(this.handleError) 
     );  
+  }
+  deleteCollection(url: string): Observable<any> {
+    return this.http.delete("/api/" + url).pipe(
+      catchError(this.handleError) 
+    );
   }
   getUserCollections(url: string): Observable<any> {
     return this.http.get("/api/" + url).pipe(
