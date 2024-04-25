@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { CreateCollectionComponent } from '../create-collection/create-collection.component';
 import { HttpParams } from '@angular/common/http';
-
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-user-front',
   standalone: true,
@@ -19,7 +19,8 @@ import { HttpParams } from '@angular/common/http';
     MatButtonModule,
     CommonModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    RouterLink
   ],
   templateUrl: './user-front.component.html',
   styleUrl: './user-front.component.scss'

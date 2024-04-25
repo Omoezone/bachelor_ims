@@ -41,6 +41,12 @@ export class HttpServiceService {
       catchError(this.handleError) 
     );
   }
+  getItemCollections(url: string): Observable<any> {
+    return this.http.get("/api/" + url).pipe(
+      catchError(this.handleError) 
+    );
+  }
+  
   private handleError(error: any) {
     console.error('An error occurred:', error);
     return throwError(error);

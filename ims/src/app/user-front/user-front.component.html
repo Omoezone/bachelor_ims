@@ -21,7 +21,7 @@
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <button mat-icon-button (click)="viewDetails(element)" aria-label="View details">
+                    <button mat-icon-button [routerLink]="['/details', element.collectionId]" aria-label="View details">
                         <mat-icon>visibility</mat-icon>
                     </button>
                     <button mat-icon-button color="warn" (click)="deleteCollection(element)" aria-label="Delete">

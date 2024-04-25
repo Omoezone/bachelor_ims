@@ -12,10 +12,10 @@ import { UserFrontComponent } from './user-front/user-front.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FlexLayoutServerModule } from '@angular/flex-layout/server';
 import { CreateCollectionComponent } from './create-collection/create-collection.component';
-
+import { DetailCollectionComponent } from './detail-collection/detail-collection.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
     ],
   imports: [
     BrowserModule,
@@ -27,7 +27,8 @@ import { CreateCollectionComponent } from './create-collection/create-collection
     UserFrontComponent,
     FlexLayoutModule,
     FlexLayoutServerModule,
-    CreateCollectionComponent
+    CreateCollectionComponent,
+    DetailCollectionComponent
   ],
   providers: [
     provideClientHydration(),
