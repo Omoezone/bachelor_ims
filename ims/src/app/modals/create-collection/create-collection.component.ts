@@ -3,6 +3,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'; 
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-create-collection',
   standalone: true,
@@ -10,7 +11,8 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
   ],
   templateUrl: './create-collection.component.html',
   styleUrl: './create-collection.component.scss'

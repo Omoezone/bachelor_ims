@@ -27,10 +27,19 @@ export class HttpServiceService {
   }
 
   postCollection(url: string, data: any, params: any): Observable<any> {
+    console.log("data: ", data, "params: ", params)
     return this.http.post("/api/" + url, data, { params }).pipe(
       catchError(this.handleError) 
     );  
   }
+  
+  postItem(url: string, data: any, params: any): Observable<any> {
+    console.log("data: ", data, "params: ", params)
+    return this.http.post("/api/" + url, data, { params }).pipe(
+      catchError(this.handleError) 
+    );  
+  }
+
   deleteCollection(url: string): Observable<any> {
     return this.http.delete("/api/" + url).pipe(
       catchError(this.handleError) 

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { HttpServiceService } from '../service/http/http-service.service';
 import { UserService } from '../service/userStorage/user.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { CreateCollectionComponent } from '../create-collection/create-collection.component';
+import { CreateCollectionComponent } from '../modals/create-collection/create-collection.component';
 import { HttpParams } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 
@@ -49,7 +49,7 @@ export class UserFrontComponent {
   }
   newCollection() {
     const dialogRef = this.dialog.open(CreateCollectionComponent, {
-      width: '250px'
+      width: '30%'
     });
 
     dialogRef.afterClosed().subscribe(result => {

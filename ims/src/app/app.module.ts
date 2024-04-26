@@ -11,13 +11,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { UserFrontComponent } from './user-front/user-front.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FlexLayoutServerModule } from '@angular/flex-layout/server';
-import { CreateCollectionComponent } from './create-collection/create-collection.component';
+import { CreateCollectionComponent } from './modals/create-collection/create-collection.component';
 import { DetailCollectionComponent } from './detail-collection/detail-collection.component';
-import { CreateItemComponent } from './create-item/create-item.component';
+import { CreateItemComponent } from './modals/create-item/create-item.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    CreateItemComponent,
     ],
   imports: [
     BrowserModule,
@@ -30,7 +30,8 @@ import { CreateItemComponent } from './create-item/create-item.component';
     FlexLayoutModule,
     FlexLayoutServerModule,
     CreateCollectionComponent,
-    DetailCollectionComponent
+    DetailCollectionComponent,
+    CreateItemComponent
   ],
   providers: [
     provideClientHydration(),
