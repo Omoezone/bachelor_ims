@@ -10,6 +10,7 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { CreateCollectionComponent } from '../create-collection/create-collection.component';
 import { HttpParams } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-user-front',
   standalone: true,
@@ -36,7 +37,6 @@ export class UserFrontComponent {
   ) { }
 
   ngOnInit() {
-    // Fetch collection data
     this.userId = this.userService.getUserId();
     console.log(this.userId);
     this.http.getUserCollections(`users/${this.userId}/collections`).subscribe({
@@ -57,7 +57,6 @@ export class UserFrontComponent {
         const params = new HttpParams().set('userId', this.userId.toString());
         this.http.postCollection(`collections`, {"name": result}, params).subscribe({
           next: (data: any) => {
-            console.log("data: ", data)
             this.dataSource = [...this.dataSource, data];
           },
           error: (error: any) => console.error('There was an error!', error)

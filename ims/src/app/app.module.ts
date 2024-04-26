@@ -13,9 +13,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FlexLayoutServerModule } from '@angular/flex-layout/server';
 import { CreateCollectionComponent } from './create-collection/create-collection.component';
 import { DetailCollectionComponent } from './detail-collection/detail-collection.component';
+import { CreateItemComponent } from './create-item/create-item.component';
 @NgModule({
   declarations: [
     AppComponent,
+    CreateItemComponent,
     ],
   imports: [
     BrowserModule,
