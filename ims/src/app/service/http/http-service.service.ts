@@ -25,7 +25,11 @@ export class HttpServiceService {
       catchError(this.handleError) 
     );  
   }
-
+  validateToken(url: string, token: string): Observable<any> {
+    return this.http.post("/api/auth/" + url, token).pipe(
+      catchError(this.handleError) 
+    );
+  }
   postCollection(url: string, data: any, params: any): Observable<any> {
     console.log("data: ", data, "params: ", params)
     return this.http.post("/api/" + url, data, { params }).pipe(
