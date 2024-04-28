@@ -1,0 +1,21 @@
+mat-grid-tile {
+    background: #673ab7;
+}
+
+.internalMatGrid{  
+    min-width:80%;
+    background: lightpink;
+    opacity: 40%;
+}
+
+.tileDesign {
+    background: lightpink;
+}
+.backgroundImage{
+    background: #673ab7;
+    background-image: url('../../../assets/bannerLearnMore.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; 
+    width: 100%;
+}

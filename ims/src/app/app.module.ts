@@ -14,6 +14,7 @@ import { FlexLayoutServerModule } from '@angular/flex-layout/server';
 import { CreateCollectionComponent } from './modals/create-collection/create-collection.component';
 import { DetailCollectionComponent } from './detail-collection/detail-collection.component';
 import { CreateItemComponent } from './modals/create-item/create-item.component';
+import { LearnMoreComponent } from './information/learn-more/learn-more.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CreateItemComponent } from './modals/create-item/create-item.component'
     FlexLayoutServerModule,
     CreateCollectionComponent,
     DetailCollectionComponent,
-    CreateItemComponent
+    CreateItemComponent,
+    LearnMoreComponent
   ],
   providers: [
     provideClientHydration(),

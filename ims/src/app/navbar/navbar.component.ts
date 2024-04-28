@@ -35,7 +35,7 @@ export class NavbarComponent {
   showLoginForm = false;
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+    password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(45)]]
   });
 
   constructor(
@@ -52,6 +52,7 @@ export class NavbarComponent {
   get isLoggedIn(): boolean {
     return this.userService.isLoggedIn();
   }
+
   onSubmit() {
     if (this.loginForm.invalid) {
       return;
@@ -60,8 +61,10 @@ export class NavbarComponent {
     this.httpService.login("login", email!, password!).subscribe({
       next: (success) => {
         console.log('Login successful');
+
         // Set the token in the cookie
         this.cookieService.set('authToken', success.token);
+
         // Set the user in the local storage and service, localStorage is for persistence across sessions/refreshs for now
         localStorage.setItem('user', JSON.stringify(success.user));
         this.userService.setUser(success.user);
