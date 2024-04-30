@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../service/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,8 @@ export class LoginComponent {
     private httpService: HttpServiceService, 
     private cookieService: CookieService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   loginForm = this.fb.group({
@@ -43,11 +45,13 @@ export class LoginComponent {
     this.httpService.login("login", email!, password!).subscribe({
       next: (success) => {
         console.log('Login successful');
-
+        console.log('success: ', success);
+        
         this.cookieService.set('authToken', success.token);
-        localStorage.setItem('user', JSON.stringify(success.user));
+        this.cookieService.set('user', JSON.stringify(success.user));
         this.userService.setUser(success.user);
 
+        this.authService.login();
         this.router.navigate(['/userFrontPage']); 
       },
       error: (error) => {

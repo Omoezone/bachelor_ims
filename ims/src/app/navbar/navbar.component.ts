@@ -2,17 +2,15 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { HttpServiceService } from '../service/http/http-service.service';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../service/userStorage/user.service';
 import { MatMenuModule } from '@angular/material/menu'; 
 import {MatIconModule} from '@angular/material/icon';
-import { Router } from '@angular/router';
-
+import { AuthService } from '../service/auth/auth.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -32,18 +30,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-
   constructor(
-    private userService: UserService,
-    private cookieService: CookieService,
+    private authService: AuthService,
+    private router: Router,
+    private userService: UserService
   ) {}
+  isLoggedIn: boolean = false;
 
-  get isLoggedIn(): boolean {
-    return this.userService.isLoggedIn();
+  ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    });
+    const userCookie = this.userService.getUserCookie();
+    if (userCookie) {
+      const user = JSON.parse(userCookie);
+      this.userService.setUser(user);
+      console.log('user: ', user);
+    } else {
+      console.log('User cookie not found');
+    }
   }
 
-  logout() {
-    this.userService.setUser(null); 
-    this.cookieService.delete('authToken');
+  logout() { 
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 }

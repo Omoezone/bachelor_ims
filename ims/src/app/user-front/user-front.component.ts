@@ -38,7 +38,9 @@ export class UserFrontComponent {
 
   ngOnInit() {
     this.userId = this.userService.getUserId();
-    console.log(this.userId);
+    console.log("userIdUser: " ,this.userId);
+    console.log('userUser: ', this.userService.getUser());
+
     this.http.getUserCollections(`users/${this.userId}/collections`).subscribe({
       next: (data: any) => {
         this.dataSource = data
@@ -68,19 +70,9 @@ export class UserFrontComponent {
     this.http.deleteCollection(`collections/${collection.collectionId}`).subscribe({
       next: (data: any) => {
         console.log("data: ", data)
-        this.dataSource = this.dataSource.filter((element: any) => element.id !== collection.id);
+        this.dataSource = this.dataSource.filter((element: any) => element.collectionId !== collection.collectionId);
       },
       error: (error: any) => console.error('There was an error!', error)
     });
-  }
-
-  viewDetails(element: any) {
-    // Collection details
-    console.log('View details for', element);
-  }
-
-  deleteElement(element: any) {
-    // delete collection
-    console.log('Delete', element);
   }
 }
