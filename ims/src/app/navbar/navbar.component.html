@@ -3,7 +3,7 @@
       <button mat-button routerLink="/">IMS</button>
       <span class="spacer"></span>
       <ng-container *ngIf="!isLoggedIn; else loggedInBlock">
-        <button mat-button (click)="toggleLoginForm()">Login</button>
+        <button mat-button routerLink="/login">Login</button>
         <button mat-button routerLink="/register">Register</button>
       </ng-container>
       <ng-template #loggedInBlock>
@@ -16,23 +16,4 @@
         </mat-menu>
       </ng-template>
     </mat-toolbar-row>
-  </mat-toolbar>
-  
-  <div *ngIf="showLoginForm" class="login-panel">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" placeholder="Enter your email">
-        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
-        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="password" placeholder="Enter your password">
-        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
-        <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 6 characters long</mat-error>
-      </mat-form-field>
-      <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Submit</button>
-    </form>
-  </div>
-  
+</mat-toolbar>

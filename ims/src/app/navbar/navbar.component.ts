@@ -32,51 +32,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  showLoginForm = false;
-  loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(45)]]
-  });
 
   constructor(
-    private httpService: HttpServiceService, 
-    private fb: FormBuilder,
-    private cookieService: CookieService,
     private userService: UserService,
-    private router: Router
+    private cookieService: CookieService,
   ) {}
 
-  toggleLoginForm() {
-    this.showLoginForm = !this.showLoginForm;
-  }
   get isLoggedIn(): boolean {
     return this.userService.isLoggedIn();
   }
 
-  onSubmit() {
-    if (this.loginForm.invalid) {
-      return;
-    }
-    const { email, password } = this.loginForm.value;
-    this.httpService.login("login", email!, password!).subscribe({
-      next: (success) => {
-        console.log('Login successful');
-
-        // Set the token in the cookie
-        this.cookieService.set('authToken', success.token);
-
-        // Set the user in the local storage and service, localStorage is for persistence across sessions/refreshs for now
-        localStorage.setItem('user', JSON.stringify(success.user));
-        this.userService.setUser(success.user);
-        this.showLoginForm = false; 
-        // Redirect to the user front page
-        this.router.navigate(['/userFrontPage']); 
-      },
-      error: (error) => {
-        console.error('Login failed', error);
-      }
-    });
-  }
   logout() {
     this.userService.setUser(null); 
     this.cookieService.delete('authToken');

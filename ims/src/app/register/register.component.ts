@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule  } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
@@ -45,7 +45,7 @@ export class RegisterComponent {
       gender: ['', Validators.required]
     });
   }
- 
+
   onSubmit() {
     if (this.registerForm.valid) {
       console.log('Form Submitted', this.registerForm.value);
