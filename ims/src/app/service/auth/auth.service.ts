@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
+import { HttpServiceService } from '../http/http-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,22 @@ export class AuthService {
   public isLoggedIn$: Observable<boolean>;
 
   constructor(
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private httpService: HttpServiceService
   ) {
-    this.loggedInSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
+    this.loggedInSubject = new BehaviorSubject<boolean>(false); 
     this.isLoggedIn$ = this.loggedInSubject.asObservable();
+    this.checkAuthentication();
   }
+
+  private checkAuthentication(): void {
+    this.isAuthenticated().subscribe(isAuthenticated => {
+      this.loggedInSubject.next(isAuthenticated); 
+    });
+  }
+
   login() {
     this.loggedInSubject.next(true);
-    console.log('logged in: ', this.loggedInSubject.value)
   }
 
   logout(): void {
@@ -26,9 +35,22 @@ export class AuthService {
     this.cookieService.delete('user');
     this.loggedInSubject.next(false);
   }
-
-  isAuthenticated(): boolean {
-    return !!this.cookieService.get('authToken');
+  
+  isAuthenticated(): Observable<boolean> {
+    return this.httpService.validateToken('verify', this.cookieService.get('authToken'))
+      .pipe(
+        map(data => {
+          console.log('Data received:', data);
+          if (!data) {
+            return false;
+          }
+          return true;
+        }),
+        catchError(error => {
+          console.error('Failed to fetch data', error);
+          return of(false);
+        })
+      );
   }
 
   getAuthToken(): string | null {

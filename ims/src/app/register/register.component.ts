@@ -52,7 +52,7 @@ export class RegisterComponent {
       this.httpService.postData('users',this.registerForm.value).subscribe({
       next: (data) => {
         console.log('Data received:', data);
-        this.router.navigate(['/frontpage']); 
+        this.router.navigate(['/frontpage']);  
       },
       error: (error) => {
         console.error('Failed to fetch data', error);

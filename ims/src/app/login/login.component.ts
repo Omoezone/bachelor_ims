@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../service/auth/auth.service';
-
+import { AuthGuardService } from '../service/authGuard/auth-guard.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -29,7 +29,8 @@ export class LoginComponent {
     private cookieService: CookieService,
     private userService: UserService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private authGuard: AuthGuardService
   ) {}
 
   loginForm = this.fb.group({
@@ -41,6 +42,8 @@ export class LoginComponent {
     if (this.loginForm.invalid) {
       return;
     }
+    this.authGuard.canActivate();
+    console.log("After autguard in login component")
     const { email, password } = this.loginForm.value;
     this.httpService.login("login", email!, password!).subscribe({
       next: (success) => {
