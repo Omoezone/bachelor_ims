@@ -8,6 +8,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { CreateItemComponent } from '../modals/create-item/create-item.component';
 import { HttpParams } from '@angular/common/http';
+import { PdfGeneratorService } from '../service/pdfGenerator/pdf-generator.service';
 
 @Component({
   selector: 'app-detail-collection',
@@ -39,7 +40,8 @@ export class DetailCollectionComponent {
   constructor(
     private route: ActivatedRoute, 
     private http: HttpServiceService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private pdfService: PdfGeneratorService
   ) {}
 
   ngOnInit(): void {
@@ -126,6 +128,8 @@ export class DetailCollectionComponent {
             });
         }
     });
-}
-
+  }
+  exportCollection(): void {
+    this.pdfService.generatePDF({ content: this.dataSource });
+  }
 }
