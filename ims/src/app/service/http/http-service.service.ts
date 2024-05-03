@@ -12,12 +12,20 @@ export class HttpServiceService {
   ) {}
   baseUrl = 'http://localhost:8081';
 
+  // USER
   postData(url: string, data: any): Observable<any> {
     return this.http.post("/api/" + url, data).pipe(
       catchError(this.handleError) 
     );  
   }
 
+  updateUser(url:string, data: any): Observable<any> {
+    return this.http.put("/api/" + url, data).pipe(
+      catchError(this.handleError) 
+    );
+  }
+
+  // AUTH
   login(url: string, email: string, password: string): Observable<any> {
     const loginData = { email, password };
     console.log("loginData: ", loginData)
@@ -30,20 +38,33 @@ export class HttpServiceService {
       catchError(this.handleError) 
     ); 
   }
-  postCollection(url: string, data: any, params: any): Observable<any> {
-    console.log("data: ", data, "params: ", params)
-    return this.http.post("/api/" + url, data, { params }).pipe(
-      catchError(this.handleError) 
-    );  
-  }
-  
+
+  // ITEMS
   postItem(url: string, data: any, params: any): Observable<any> {
     console.log("data: ", data, "params: ", params)
     return this.http.post("/api/" + url, data, { params }).pipe(
       catchError(this.handleError) 
     );  
   }
+  deleteItem(url: string): Observable<any> {
+    return this.http.delete("/api/" + url).pipe(
+      catchError(this.handleError) 
+    );
+  }
 
+  updateItem(url:string, data: any): Observable<any> {
+    return this.http.put("/api/" + url, data).pipe(
+      catchError(this.handleError) 
+    );
+  }
+  
+  // Collections
+  postCollection(url: string, data: any, params: any): Observable<any> {
+    console.log("data: ", data, "params: ", params)
+    return this.http.post("/api/" + url, data, { params }).pipe(
+      catchError(this.handleError) 
+    );  
+  }
   deleteCollection(url: string): Observable<any> {
     return this.http.delete("/api/" + url).pipe(
       catchError(this.handleError) 
@@ -56,12 +77,6 @@ export class HttpServiceService {
   }
   getItemCollections(url: string): Observable<any> {
     return this.http.get("/api/" + url).pipe(
-      catchError(this.handleError) 
-    );
-  }
-
-  updateUser(url:string, data: any): Observable<any> {
-    return this.http.put("/api/" + url, data).pipe(
       catchError(this.handleError) 
     );
   }

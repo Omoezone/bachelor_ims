@@ -3,7 +3,7 @@
     <div fxLayout="row" fxLayoutGap="80px" fxLayoutAlign="center center" style="margin-bottom: 40px;">
         <button mat-raised-button color="primary" (click)="newCollection()">Create new collection</button>
         <button mat-raised-button color="primary">View all items</button>
-    </div>
+    </div> 
 
     <div style="width: 60%; max-width: 100%;">
         <ng-container *ngIf="dataSource?.length > 0; else noDataTemplate">

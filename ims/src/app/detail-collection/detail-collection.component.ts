@@ -5,6 +5,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButton } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
 import { CreateItemComponent } from '../modals/create-item/create-item.component';
 import { HttpParams } from '@angular/common/http';
 
@@ -16,13 +17,14 @@ import { HttpParams } from '@angular/common/http';
     MatButton,
     CommonModule,
     CreateItemComponent,
-    MatDialogModule
+    MatDialogModule,
+    MatIcon
   ],
   templateUrl: './detail-collection.component.html',
   styleUrl: './detail-collection.component.scss'
 })
 export class DetailCollectionComponent {
-  displayedColumns: string[] = ['name', 'price', 'amount', 'type', 'dimensions', 'color'];
+  displayedColumns: string[] = ['name', 'price', 'type', 'dimensions', 'color', 'amount', 'actions'];
   dataSource!: any;
   collectionId: string = '';
 
@@ -52,7 +54,7 @@ export class DetailCollectionComponent {
           error: (error: any) => console.error('There was an error!', error)
         });
       }
-    });
+    }); 
   }
   createItem(): void {
     const dialogRef = this.dialog.open(CreateItemComponent, {
@@ -75,7 +77,7 @@ export class DetailCollectionComponent {
             this.http.postItem(`items`, result, params).subscribe({
               next: (data: any) =>
                 {
-                  this.dataSource = [...this.dataSource, data];
+                  this.dataSource = [...this.dataSource, result];
                 },
               error: (error: any) => console.error('There was an error!', error)
             });
@@ -84,4 +86,46 @@ export class DetailCollectionComponent {
       console.log('The dialog was closed. Result:', result);
     });
   }
+
+  deleteItem(item: any) {
+    this.http.deleteItem(`items/${item.itemId}`).subscribe({
+      next: (data: any) => {
+        this.dataSource = this.dataSource.filter((element: any) => element.itemId !== item.itemId);
+      },
+      error: (error: any) => console.error('There was an error!', error)
+    });
+  }
+
+  updateItem(item: any): void {
+    console.log("item: ", item)
+    const dialogRef = this.dialog.open(CreateItemComponent, {
+        width: '40%',
+        data: {
+            itemId: parseInt(item.itemId), 
+            name: item.name,
+            price: parseInt(item.price),
+            amount: parseInt(item.amount),
+            type: item.type,
+            width: parseInt(item.width),
+            height: parseInt(item.height),
+            color: item.color,
+            collectionId: parseInt(this.collectionId)
+        }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+            this.http.updateItem(`items/${item.itemId}`, result).subscribe({
+                next: (data: any) => {
+                  const index = this.dataSource.findIndex((i: any) => i.itemId === item.itemId);
+                  if (index !== -1) {
+                      this.dataSource[index] = result;
+                      this.dataSource = [...this.dataSource]; 
+                  }
+                },
+                error: (error: any) => console.error('There was an error!', error)
+            });
+        }
+    });
+}
+
 }
