@@ -30,6 +30,8 @@ export class UserFrontComponent {
   displayedColumns: string[] = ['name', 'amountItems', 'actions'];
   dataSource!: any;;
   userId: any;
+  username: string = 'PLACEHOLDER';
+
   constructor(
     private http: HttpServiceService,
     private userService: UserService,
@@ -38,8 +40,8 @@ export class UserFrontComponent {
 
   ngOnInit() {
     this.userId = this.userService.getUserId();
-    console.log("userIdUser: " ,this.userId);
-    console.log('userUser: ', this.userService.getUser());
+    this.username = this.userService.getUserName();
+    console.log("username", this.username)
 
     this.http.getUserCollections(`users/${this.userId}/collections`).subscribe({
       next: (data: any) => {

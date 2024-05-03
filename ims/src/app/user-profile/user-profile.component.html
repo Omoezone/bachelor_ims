@@ -1,0 +1,66 @@
+<div class="form-container">
+    <h1>Update User</h1>
+    <form [formGroup]="userUpdateForm" (ngSubmit)="onSubmit()" class="form-field">
+      <div class="field-container">
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName">
+          <mat-error *ngIf="userUpdateForm.controls['firstName'].hasError('required')">Required</mat-error>
+          <mat-error *ngIf="userUpdateForm.controls['firstName'].hasError('minlength')">Min 3 chars</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- Last Name -->
+      <div class="field-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName">
+          <mat-error *ngIf="userUpdateForm.controls['lastName'].hasError('required')">Required</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- Email -->
+      <div class="field-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email">
+          <mat-error *ngIf="userUpdateForm.controls['email'].hasError('required')">Required</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- Password -->
+      <div class="field-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-error *ngIf="userUpdateForm.controls['password'].hasError('required')">Required</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- Age -->
+      <div class="field-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Age</mat-label>
+          <input matInput type="number" formControlName="age">
+          <mat-error *ngIf="userUpdateForm.controls['age'].hasError('required')">Required</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- Gender -->
+      <div class="field-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="Male">Male</mat-option>
+            <mat-option value="Female">Female</mat-option>
+            <mat-option value="Other">Other</mat-option>
+          </mat-select>
+          <mat-error *ngIf="userUpdateForm.controls['gender'].hasError('required')">Required</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- Submit Button -->
+      <button mat-raised-button color="primary" type="submit" [disabled]="!userUpdateForm.valid">Register</button>
+    </form>
+  </div>
+      

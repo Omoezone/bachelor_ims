@@ -16,6 +16,7 @@ import { DetailCollectionComponent } from './detail-collection/detail-collection
 import { CreateItemComponent } from './modals/create-item/create-item.component';
 import { LearnMoreComponent } from './information/learn-more/learn-more.component';
 import { LoginComponent } from './login/login.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { LoginComponent } from './login/login.component';
     DetailCollectionComponent,
     CreateItemComponent,
     LearnMoreComponent,
-    LoginComponent
+    LoginComponent,
+    UserProfileComponent
   ],
   providers: [
     provideClientHydration(),

@@ -7,6 +7,7 @@ import { DetailCollectionComponent } from './detail-collection/detail-collection
 import { LearnMoreComponent } from './information/learn-more/learn-more.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './service/authGuard/auth-guard.service';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/frontpage', pathMatch: 'full' }, 
@@ -15,7 +16,8 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'learnMore', component: LearnMoreComponent },
     { path: 'userFrontPage', component: UserFrontComponent, canActivate: [AuthGuardService]},
-    { path: 'details/:id', component: DetailCollectionComponent, canActivate: [AuthGuardService] }
+    { path: 'details/:id', component: DetailCollectionComponent, canActivate: [AuthGuardService]},
+    { path: 'userProfile', component: UserProfileComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

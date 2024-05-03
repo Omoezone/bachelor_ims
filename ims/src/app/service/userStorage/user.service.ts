@@ -18,7 +18,9 @@ export class UserService {
   }
 
   setUser(user: any) {
+    console.log("userBeforeSet: ", this.currentUser)
     this.currentUser = user;
+    console.log("userAfterSet: ", this.currentUser)
     this.cookieService.set(this.user, JSON.stringify(user));
   }
 
@@ -26,12 +28,19 @@ export class UserService {
     return this.currentUser;
   }
 
+  getUserName(): string {
+    if (this.currentUser) {
+      return this.currentUser.firstName + ' ' + this.currentUser.lastName;
+    } else {
+      return "null";
+    }
+  
+  }
+
   getUserId() {
     if (this.currentUser) {
-      console.log('user_id: ', this.currentUser.user_id);
-      return this.currentUser.user_id;
+      return this.currentUser.userId;
     } else {
-      console.error('User is not logged in.');
       return null;
     }
   }

@@ -59,6 +59,12 @@ export class HttpServiceService {
       catchError(this.handleError) 
     );
   }
+
+  updateUser(url:string, data: any): Observable<any> {
+    return this.http.put("/api/" + url, data).pipe(
+      catchError(this.handleError) 
+    );
+  }
   
   private handleError(error: any) {
     console.error('An error occurred:', error);
