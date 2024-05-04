@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { ItemsBase } from '../../types/items';
 
 @Component({
   selector: 'app-create-item',
@@ -24,7 +25,7 @@ export class CreateItemComponent {
   
   constructor(
     public dialogRef: MatDialogRef<CreateItemComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: ItemsBase
   ) {}
 
   onNoClick(): void {

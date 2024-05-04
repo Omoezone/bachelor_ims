@@ -45,7 +45,6 @@ export class NavbarComponent {
     if (userCookie) {
       const user = JSON.parse(userCookie);
       this.userService.setUser(user);
-      console.log('user: ', user);
     } else {
       console.log('User cookie not found');
     }

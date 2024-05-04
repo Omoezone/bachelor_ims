@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../service/auth/auth.service';
 import { AuthGuardService } from '../service/authGuard/auth-guard.service';
+import { Login } from '../types/login';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -43,12 +45,10 @@ export class LoginComponent {
       return;
     }
     this.authGuard.canActivate();
-    console.log("After autguard in login component")
     const { email, password } = this.loginForm.value;
     this.httpService.login("login", email!, password!).subscribe({
       next: (success) => {
         console.log('Login successful');
-        console.log('success: ', success);
         
         this.cookieService.set('authToken', success.token);
         this.cookieService.set('user', JSON.stringify(success.user));

@@ -9,6 +9,7 @@ import { MatIcon } from '@angular/material/icon';
 import { CreateItemComponent } from '../modals/create-item/create-item.component';
 import { HttpParams } from '@angular/common/http';
 import { PdfGeneratorService } from '../service/pdfGenerator/pdf-generator.service';
+import { ItemsBase, Items } from '../types/items';
 
 @Component({
   selector: 'app-detail-collection',
@@ -30,11 +31,11 @@ export class DetailCollectionComponent {
   collectionId: string = '';
 
   itemName: string = '';
-  itemPrice: number | null = null;
-  itemAmount: number | null = null;
+  itemPrice: number = 0;
+  itemAmount: number = 0;
   itemType: string = '';
-  itemWidth: number | null = null;
-  itemHeight: number | null = null;
+  itemWidth: number = 0;
+  itemHeight: number = 0;
   itemColor: string = '';
 
   constructor(
@@ -59,18 +60,21 @@ export class DetailCollectionComponent {
     }); 
   }
   createItem(): void {
+    const itemData: ItemsBase = {
+      name: this.itemName,
+      price: this.itemPrice,
+      amount: this.itemAmount,
+      type: this.itemType,
+      width: this.itemWidth,
+      height: this.itemHeight,
+      color: this.itemColor
+    };
+
     const dialogRef = this.dialog.open(CreateItemComponent, {
       width: '40%',
-      data: {
-        name: this.itemName,
-        price: this.itemPrice,
-        amount: this.itemAmount,
-        type: this.itemType,
-        width: this.itemWidth,
-        height: this.itemHeight,
-        color: this.itemColor
-      }
+      data: itemData
     });
+
     dialogRef.afterClosed().subscribe(result => {
       console.log("result: ", result, this.collectionId)
       if (result) {      
@@ -85,7 +89,6 @@ export class DetailCollectionComponent {
             });
           }
       }
-      console.log('The dialog was closed. Result:', result);
     });
   }
 
@@ -98,21 +101,20 @@ export class DetailCollectionComponent {
     });
   }
 
-  updateItem(item: any): void {
-    console.log("item: ", item)
+  updateItem(item: Items): void {
     const dialogRef = this.dialog.open(CreateItemComponent, {
-        width: '40%',
-        data: {
-            itemId: parseInt(item.itemId), 
-            name: item.name,
-            price: parseInt(item.price),
-            amount: parseInt(item.amount),
-            type: item.type,
-            width: parseInt(item.width),
-            height: parseInt(item.height),
-            color: item.color,
-            collectionId: parseInt(this.collectionId)
-        }
+      width: '40%',
+      data: {
+        itemId: item.itemId, 
+        name: item.name,
+        price: item.price,
+        amount: item.amount,
+        type: item.type,
+        width: item.width,
+        height: item.height,
+        color: item.color,
+        collectionId: parseInt(this.collectionId)
+      }
     });
     dialogRef.afterClosed().subscribe(result => {
         if (result) {

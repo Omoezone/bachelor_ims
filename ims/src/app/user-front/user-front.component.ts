@@ -45,7 +45,6 @@ export class UserFrontComponent {
     this.http.getUserCollections(`users/${this.userId}/collections`).subscribe({
       next: (data: any) => {
         this.dataSource = data
-        console.log("data: ", this.dataSource)
       },
       error: (error: any) => console.error('There was an error!', error)
     });
@@ -70,7 +69,6 @@ export class UserFrontComponent {
   deleteCollection(collection: any) {
     this.http.deleteCollection(`collections/${collection.collectionId}`).subscribe({
       next: (data: any) => {
-        console.log("data: ", data)
         this.dataSource = this.dataSource.filter((element: any) => element.collectionId !== collection.collectionId);
       },
       error: (error: any) => console.error('There was an error!', error)

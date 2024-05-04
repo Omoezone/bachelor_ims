@@ -48,10 +48,8 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      console.log('Form Submitted', this.registerForm.value);
-      this.httpService.postData('users',this.registerForm.value).subscribe({
+      this.httpService.postData('users', this.registerForm.value).subscribe({
       next: (data) => {
-        console.log('Data received:', data);
         this.router.navigate(['/frontpage']);  
       },
       error: (error) => {
