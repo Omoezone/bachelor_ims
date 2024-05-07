@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
 import { HttpServiceService } from '../service/http/http-service.service';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../service/userStorage/user.service';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../service/auth/auth.service';
 import { AuthGuardService } from '../service/authGuard/auth-guard.service';
-import { Login } from '../types/login';
+
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,8 @@ import { Login } from '../types/login';
     CommonModule,
     FormsModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -32,7 +35,8 @@ export class LoginComponent {
     private userService: UserService,
     private router: Router,
     private authService: AuthService,
-    private authGuard: AuthGuardService
+    private authGuard: AuthGuardService,
+    private snackBar: MatSnackBar
   ) {}
 
   loginForm = this.fb.group({
@@ -56,9 +60,23 @@ export class LoginComponent {
 
         this.authService.login();
         this.router.navigate(['/userFrontPage']); 
+
+        this.snackBar.open('Login successful!', 'Close', {
+          duration: 3000, 
+        });
+        
       },
       error: (error) => {
         console.error('Login failed', error);
+        if (error.status === 401) {
+          this.snackBar.open('Unauthorized: Incorrect email or password.', 'Close', {
+            duration: 3000,
+          });
+        } else {
+          this.snackBar.open('Login failed. Internal server error, try again later.', 'Close', {
+            duration: 5000,
+          });
+        }
       }
     });
   }

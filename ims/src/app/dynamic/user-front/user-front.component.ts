@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
+import { RouterLink } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpParams } from '@angular/common/http';
+
+import { HttpServiceService } from '../../service/http/http-service.service';
+import { UserService } from '../../service/userStorage/user.service';
+import { CreateCollectionComponent } from '../../modals/create-collection/create-collection.component';
+
+import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpServiceService } from '../service/http/http-service.service';
-import { UserService } from '../service/userStorage/user.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { CreateCollectionComponent } from '../modals/create-collection/create-collection.component';
-import { HttpParams } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-front',
@@ -21,7 +24,8 @@ import { RouterLink } from '@angular/router';
     CommonModule,
     MatIconModule,
     MatDialogModule,
-    RouterLink
+    RouterLink,
+    MatSnackBarModule
   ],
   templateUrl: './user-front.component.html',
   styleUrl: './user-front.component.scss'
@@ -35,7 +39,8 @@ export class UserFrontComponent {
   constructor(
     private http: HttpServiceService,
     private userService: UserService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -60,12 +65,16 @@ export class UserFrontComponent {
         this.http.postCollection(`collections`, {"name": result}, params).subscribe({
           next: (data: any) => {
             this.dataSource = [...this.dataSource, data];
+            this.snackBar.open('Collection added successful!', 'Close', {
+              duration: 2000, 
+            });
           },
           error: (error: any) => console.error('There was an error!', error)
         });
       }
     });
   }
+  
   deleteCollection(collection: any) {
     this.http.deleteCollection(`collections/${collection.collectionId}`).subscribe({
       next: (data: any) => {
@@ -74,4 +83,9 @@ export class UserFrontComponent {
       error: (error: any) => console.error('There was an error!', error)
     });
   }
+
+  goBack(): void {
+    window.history.back();
+  }
+
 }

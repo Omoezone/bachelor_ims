@@ -43,6 +43,7 @@ export class PdfGeneratorService {
       });
     }
 
+    // Draw table rows
     for (let i = 0; i < data.length; i++) {
       const row = data[i];
       for (let j = 0; j < row.length; j++) {

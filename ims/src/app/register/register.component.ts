@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCardModule } from '@angular/material/card';
-import { HttpServiceService } from '../service/http/http-service.service';
+import { Router, RouterLink } from '@angular/router';
+
 import { HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpServiceService } from '../service/http/http-service.service';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -22,7 +26,11 @@ import { Router } from '@angular/router';
     MatButtonModule, 
     MatFormFieldModule,
     MatCardModule,
-    HttpClientModule],
+    HttpClientModule,
+    MatSnackBarModule,
+    RouterLink,
+    MatIcon
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -32,7 +40,8 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder, 
     private httpService: HttpServiceService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -51,6 +60,9 @@ export class RegisterComponent {
       this.httpService.postData('users', this.registerForm.value).subscribe({
       next: (data) => {
         this.router.navigate(['/frontpage']);  
+        this.snackBar.open('Registration successful!', 'Close', {
+          duration: 3000, 
+        });
       },
       error: (error) => {
         console.error('Failed to fetch data', error);

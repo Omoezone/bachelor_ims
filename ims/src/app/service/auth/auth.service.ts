@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
+
+import { CookieService } from 'ngx-cookie-service';
 import { HttpServiceService } from '../http/http-service.service';
 
 @Injectable({

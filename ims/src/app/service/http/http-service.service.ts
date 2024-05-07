@@ -24,6 +24,11 @@ export class HttpServiceService {
       catchError(this.handleError) 
     );
   }
+  allItemsUser(url: string): Observable<any> {
+    return this.http.get("/api/" + url).pipe(
+      catchError(this.handleError) 
+    );
+  }
 
   // AUTH
   login(url: string, email: string, password: string): Observable<any> {

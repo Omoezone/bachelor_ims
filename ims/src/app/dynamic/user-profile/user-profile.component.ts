@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpServiceService } from '../service/http/http-service.service';
-import { UserService } from '../service/userStorage/user.service';
 import { FormBuilder, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+
+import { HttpServiceService } from '../../service/http/http-service.service';
+import { UserService } from '../../service/userStorage/user.service';
+
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
-import { Router } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,7 +19,10 @@ import { Router } from '@angular/router';
     FormsModule,
     MatInputModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatIcon,
+    RouterLink
   ],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss'
@@ -27,6 +34,7 @@ export class UserProfileComponent {
     private fb: FormBuilder, 
     private http: HttpServiceService,
     private userService: UserService,
+    private snackBar: MatSnackBar,
     private router: Router
   ) {}
 
@@ -48,9 +56,12 @@ export class UserProfileComponent {
       next: (response) => {
         console.log('User updated successfully:', response);
         
-        // update user in userService
         this.userService.setUser(this.userUpdateForm.value);
-        this.router.navigate(['/userFrontPage']);  
+        this.router.navigate(['/userFrontPage']); 
+
+        this.snackBar.open('User updated successful!', 'Close', {
+          duration: 3000, 
+        });
       },
       error: (error) => {
         console.error('Error updating user:', error);

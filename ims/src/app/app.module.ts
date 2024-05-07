@@ -1,22 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { RegisterComponent } from './register/register.component';
-import { FooterComponent } from './footer/footer.component';
-import { FrontpageComponent } from './frontpage/frontpage.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { UserFrontComponent } from './user-front/user-front.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FlexLayoutServerModule } from '@angular/flex-layout/server';
+
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { RegisterComponent } from './register/register.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { FrontpageComponent } from './layout/frontpage/frontpage.component';
+import { UserFrontComponent } from './dynamic/user-front/user-front.component';
 import { CreateCollectionComponent } from './modals/create-collection/create-collection.component';
-import { DetailCollectionComponent } from './detail-collection/detail-collection.component';
+import { DetailCollectionComponent } from './dynamic/detail-collection/detail-collection.component';
 import { CreateItemComponent } from './modals/create-item/create-item.component';
 import { LearnMoreComponent } from './information/learn-more/learn-more.component';
 import { LoginComponent } from './login/login.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserProfileComponent } from './dynamic/user-profile/user-profile.component';
+import { AllItemsComponent } from './dynamic/all-items/all-items.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     CreateItemComponent,
     LearnMoreComponent,
     LoginComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AllItemsComponent
   ],
   providers: [
     provideClientHydration(),

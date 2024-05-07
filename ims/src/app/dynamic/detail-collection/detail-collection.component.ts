@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ItemsBase, Items } from '../../types/items';
+import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { HttpServiceService } from '../service/http/http-service.service';
+
+import { CreateItemComponent } from '../../modals/create-item/create-item.component';
+import { PdfGeneratorService } from '../../service/pdfGenerator/pdf-generator.service';
+import { HttpServiceService } from '../../service/http/http-service.service';
+
 import { MatTableModule } from '@angular/material/table';
 import { MatButton } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
-import { CreateItemComponent } from '../modals/create-item/create-item.component';
-import { HttpParams } from '@angular/common/http';
-import { PdfGeneratorService } from '../service/pdfGenerator/pdf-generator.service';
-import { ItemsBase, Items } from '../types/items';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-detail-collection',
@@ -20,7 +23,8 @@ import { ItemsBase, Items } from '../types/items';
     CommonModule,
     CreateItemComponent,
     MatDialogModule,
-    MatIcon
+    MatIcon,
+    MatSnackBarModule
   ],
   templateUrl: './detail-collection.component.html',
   styleUrl: './detail-collection.component.scss'
@@ -42,7 +46,8 @@ export class DetailCollectionComponent {
     private route: ActivatedRoute, 
     private http: HttpServiceService,
     public dialog: MatDialog,
-    private pdfService: PdfGeneratorService
+    private pdfService: PdfGeneratorService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -84,6 +89,9 @@ export class DetailCollectionComponent {
               next: (data: any) =>
                 {
                   this.dataSource = [...this.dataSource, result];
+                  this.snackBar.open('Item added successful!', 'Close', {
+                    duration: 2000, 
+                  });
                 },
               error: (error: any) => console.error('There was an error!', error)
             });
@@ -124,6 +132,9 @@ export class DetailCollectionComponent {
                   if (index !== -1) {
                       this.dataSource[index] = result;
                       this.dataSource = [...this.dataSource]; 
+                      this.snackBar.open('Item updated successful!', 'Close', {
+                        duration: 2000, 
+                      });
                   }
                 },
                 error: (error: any) => console.error('There was an error!', error)
@@ -133,5 +144,8 @@ export class DetailCollectionComponent {
   }
   exportCollection(): void {
     this.pdfService.generatePDF({ content: this.dataSource });
+  }
+  goBack(): void {
+    window.history.back();
   }
 }

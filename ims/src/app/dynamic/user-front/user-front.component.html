@@ -1,8 +1,9 @@
 <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
     <h1>Welcome, {{ username }}</h1>
     <div fxLayout="row" fxLayoutGap="80px" fxLayoutAlign="center center" style="margin-bottom: 40px;">
+        <button mat-button (click)="goBack()"><mat-icon>arrow_back</mat-icon>Go Back</button>
         <button mat-raised-button color="primary" (click)="newCollection()">Create new collection</button>
-        <button mat-raised-button color="primary">View all items</button>
+        <button mat-raised-button color="primary" routerLink="/allItems">View all items</button>
     </div> 
 
     <div style="width: 60%; max-width: 100%;">

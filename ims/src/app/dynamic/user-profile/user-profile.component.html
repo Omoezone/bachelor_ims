@@ -1,5 +1,8 @@
-<div class="form-container">
+<div class="form-container"> 
+  <div fxLayout="row" fxLayoutGap="80px" fxLayoutAlign="center center" style="margin-bottom: 40px;">
     <h1>Update User</h1>
+    <button mat-button routerLink="/"><mat-icon>arrow_back</mat-icon>Go Back</button>
+  </div>
     <form [formGroup]="userUpdateForm" (ngSubmit)="onSubmit()" class="form-field">
       <div class="field-container">
         <mat-form-field appearance="fill">
@@ -60,7 +63,7 @@
       </div>
   
       <!-- Submit Button -->
-      <button mat-raised-button color="primary" type="submit" [disabled]="!userUpdateForm.valid">Register</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!userUpdateForm.valid">Update</button>
     </form>
   </div>
       
