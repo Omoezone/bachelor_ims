@@ -65,7 +65,10 @@ export class RegisterComponent {
         });
       },
       error: (error) => {
-        console.error('Failed to fetch data', error);
+        console.log("errorStuff", error);
+        this.snackBar.open('This email is already in use, please chose another or login', 'Close', {
+          duration: 5000,
+        });
       }
     });
     }

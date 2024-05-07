@@ -18,11 +18,13 @@ import { LearnMoreComponent } from './information/learn-more/learn-more.componen
 import { LoginComponent } from './login/login.component';
 import { UserProfileComponent } from './dynamic/user-profile/user-profile.component';
 import { AllItemsComponent } from './dynamic/all-items/all-items.component';
+import { ConfirmationComponent } from './modals/confirmation/confirmation.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ConfirmationComponent,
     ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { UserService } from '../../service/userStorage/user.service';
 import { HttpServiceService } from '../../service/http/http-service.service';
+import { PdfGeneratorService } from '../../service/pdfGenerator/pdf-generator.service';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatButton } from '@angular/material/button';
@@ -28,6 +29,7 @@ export class AllItemsComponent {
   constructor(
     private userService: UserService,
     private http: HttpServiceService,
+    private pdfService: PdfGeneratorService
   ) { }
 
   ngOnInit() {
@@ -50,6 +52,12 @@ export class AllItemsComponent {
       error: (error: any) => console.error('There was an error!', error)
     });
   }
+
+  exportCollection(): void {
+    console.log("datasource this: ", this.dataSource)
+    this.pdfService.generatePDF({ content: this.dataSource });
+  }
+
   goBack(): void {
     window.history.back();
   }

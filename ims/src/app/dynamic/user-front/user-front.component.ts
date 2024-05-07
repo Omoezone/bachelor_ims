@@ -7,6 +7,7 @@ import { HttpParams } from '@angular/common/http';
 import { HttpServiceService } from '../../service/http/http-service.service';
 import { UserService } from '../../service/userStorage/user.service';
 import { CreateCollectionComponent } from '../../modals/create-collection/create-collection.component';
+import { ConfirmationComponent } from '../../modals/confirmation/confirmation.component';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -76,11 +77,26 @@ export class UserFrontComponent {
   }
   
   deleteCollection(collection: any) {
-    this.http.deleteCollection(`collections/${collection.collectionId}`).subscribe({
-      next: (data: any) => {
-        this.dataSource = this.dataSource.filter((element: any) => element.collectionId !== collection.collectionId);
-      },
-      error: (error: any) => console.error('There was an error!', error)
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: '350px',
+      data: {
+        message: 'Are you sure you want to delete this collection?'
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.http.deleteCollection(`collections/${collection.collectionId}`).subscribe({
+          next: (data: any) => {
+            this.dataSource = this.dataSource.filter((element: any) => element.collectionId !== collection.collectionId);
+            this.snackBar.open('Collection deleted successfully!', 'Close', { duration: 2000 });
+          },
+          error: (error: any) => {
+            console.error('There was an error!', error);
+            this.snackBar.open('Failed to delete collection.', 'Close', { duration: 2000 });
+          }
+        });
+      }
     });
   }
 
