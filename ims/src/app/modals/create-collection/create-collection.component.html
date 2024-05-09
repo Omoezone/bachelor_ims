@@ -4,9 +4,18 @@
     <mat-label>Collection Name</mat-label>
     <input matInput [(ngModel)]="collectionName">
   </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Select Group</mat-label>
+    <mat-select [(value)]="selectedGroupId">
+      <mat-option *ngFor="let group of groups" [value]="group.groupId">
+        {{ group.groupName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button color="warn" (click)="onNoClick()">Cancel</button>
   <span class="spacer"></span>
-  <button mat-button color="primary" [mat-dialog-close]="collectionName" cdkFocusInitial>Save</button>
+  <button mat-button color="primary" [mat-dialog-close]="{collectionName: collectionName, groupId: selectedGroupId}" cdkFocusInitial>Save</button>
 </mat-dialog-actions>
+

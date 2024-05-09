@@ -57,7 +57,6 @@ export class LoginComponent {
         this.cookieService.set('authToken', success.token);
         this.cookieService.set('user', JSON.stringify(success.user));
         this.userService.setUser(success.user);
-
         this.authService.login();
         this.router.navigate(['/userFrontPage']); 
 

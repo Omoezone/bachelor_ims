@@ -32,7 +32,7 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './user-front.component.scss'
 })
 export class UserFrontComponent {
-  displayedColumns: string[] = ['name', 'amountItems', 'actions'];
+  displayedColumns: string[] = ['name', 'groupName', 'amountItems', 'actions'];
   dataSource!: any;;
   userId: any;
   username: string = 'PLACEHOLDER';
@@ -47,10 +47,11 @@ export class UserFrontComponent {
   ngOnInit() {
     this.userId = this.userService.getUserId();
     this.username = this.userService.getUserName();
-
+    console.log("user", this.userService.getUser());
     this.http.getUserCollections(`users/${this.userId}/collections`).subscribe({
       next: (data: any) => {
         this.dataSource = data
+        console.log("dataFetch: ", data)
       },
       error: (error: any) => console.error('There was an error!', error)
     });
@@ -63,8 +64,9 @@ export class UserFrontComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const params = new HttpParams().set('userId', this.userId.toString());
-        this.http.postCollection(`collections`, {"name": result}, params).subscribe({
+        this.http.postCollection(`collections`, { "name": result.collectionName, "groupId": result.groupId }, params).subscribe({
           next: (data: any) => {
+            console.log("dataFetch2: ", data)
             this.dataSource = [...this.dataSource, data];
             this.snackBar.open('Collection added successful!', 'Close', {
               duration: 2000, 

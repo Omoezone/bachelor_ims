@@ -19,6 +19,11 @@
                 <mat-header-cell *matHeaderCellDef> Amount of items </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.itemCount}} </mat-cell>
             </ng-container>
+
+            <ng-container matColumnDef="groupName">
+                <mat-header-cell *matHeaderCellDef> Group </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.groupName}} </mat-cell>
+            </ng-container>
             
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>

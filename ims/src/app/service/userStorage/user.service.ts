@@ -18,9 +18,7 @@ export class UserService {
   }
 
   setUser(user: any) {
-    console.log("userBeforeSet: ", this.currentUser)
     this.currentUser = user;
-    console.log("userAfterSet: ", this.currentUser)
     this.cookieService.set(this.user, JSON.stringify(user));
   }
 
@@ -34,7 +32,6 @@ export class UserService {
     } else {
       return "null";
     }
-  
   }
 
   getUserId() {
@@ -42,6 +39,14 @@ export class UserService {
       return this.currentUser.userId;
     } else {
       return null;
+    }
+  }
+  getUserGroups() {
+    if (this.currentUser) {
+      console.log("groups", this.currentUser.groups);
+      return this.currentUser.groups;
+    } else {
+      return [];
     }
   }
 
