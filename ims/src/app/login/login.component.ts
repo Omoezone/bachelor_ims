@@ -58,6 +58,7 @@ export class LoginComponent {
         this.cookieService.set('user', JSON.stringify(success.user));
         this.userService.setUser(success.user);
         this.authService.login();
+        console.log('User:', success.user);
         this.router.navigate(['/userFrontPage']); 
 
         this.snackBar.open('Login successful!', 'Close', {
@@ -66,7 +67,6 @@ export class LoginComponent {
         
       },
       error: (error) => {
-        console.error('Login failed', error);
         if (error.status === 401) {
           this.snackBar.open('Unauthorized: Incorrect email or password.', 'Close', {
             duration: 3000,

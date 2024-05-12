@@ -1,3 +1,6 @@
+import { Group } from "./group";
+import { Invites } from "./invites";
+
 export interface User {
     userId: number;
     firstName: string;
@@ -15,4 +18,6 @@ export interface UserBase {
     email: string;
     age: number;
     gender?: string;
+    groups: Group[];
+    invites: Invites[];
 }

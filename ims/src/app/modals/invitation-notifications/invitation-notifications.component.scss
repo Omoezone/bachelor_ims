@@ -1,0 +1,10 @@
+mat-dialog-content {
+    overflow: auto; 
+    padding-top: 20px;
+}
+.mat-list-item {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    margin-top: 10px; 
+}

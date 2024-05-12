@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Pending group invites</h1>
+<div mat-dialog-content>
+    <mat-list-item *ngFor="let notification of data.notification">
+        <ng-container matLine>
+            <span>You have been invited to group: {{ notification.groupName }}</span><br>
+        </ng-container>
+        <ng-container matLine>
+            <span>By user: {{ notification.senderFN + ' ' + notification.senderLN }}</span><br>
+        </ng-container>
+        <button mat-button color="primary" (click)="acceptNotification(notification)">Accept</button>
+        <button mat-button color="warn" (click)="denyNotification(notification)">Deny</button>
+    </mat-list-item>
+    
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="closeDialog()">Close</button>
+</div>

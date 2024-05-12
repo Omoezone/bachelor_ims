@@ -19,6 +19,8 @@ import { LoginComponent } from './login/login.component';
 import { UserProfileComponent } from './dynamic/user-profile/user-profile.component';
 import { AllItemsComponent } from './dynamic/all-items/all-items.component';
 import { ConfirmationComponent } from './modals/confirmation/confirmation.component';
+import { InviteGroupComponent } from './modals/invite-group/invite-group.component';
+import { InvitationNotificationsComponent } from './modals/invitation-notifications/invitation-notifications.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { ConfirmationComponent } from './modals/confirmation/confirmation.compon
     LearnMoreComponent,
     LoginComponent,
     UserProfileComponent,
-    AllItemsComponent
+    AllItemsComponent,
+    InviteGroupComponent,
+    InvitationNotificationsComponent
   ],
   providers: [
     provideClientHydration(),

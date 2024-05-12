@@ -26,6 +26,20 @@ export class UserService {
     return this.currentUser;
   }
 
+  restoreUserSession() {
+    const userCookie = this.getUserCookie();
+  if (userCookie) {
+    const user = JSON.parse(userCookie);
+    this.setUser(user);
+  } else {
+    console.log('User cookie not found');
+  }
+  }
+
+  get userInvitesCount(): number {
+    return this.currentUser?.invites?.length ?? 0;
+  }
+  
   getUserName(): string {
     if (this.currentUser) {
       return this.currentUser.firstName + ' ' + this.currentUser.lastName;
@@ -43,8 +57,15 @@ export class UserService {
   }
   getUserGroups() {
     if (this.currentUser) {
-      console.log("groups", this.currentUser.groups);
       return this.currentUser.groups;
+    } else {
+      return [];
+    }
+  }
+
+  getUserInvites() {
+    if (this.currentUser) {
+      return this.currentUser.invites;
     } else {
       return [];
     }

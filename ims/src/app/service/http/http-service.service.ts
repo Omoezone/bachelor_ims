@@ -85,6 +85,25 @@ export class HttpServiceService {
       catchError(this.handleError) 
     );
   }
+
+  // Groups
+  postInvite(url: string, data: any): Observable<any> {
+    return this.http.post("/api/" + url, data).pipe(
+      catchError(this.handleError) 
+    );  
+  }
+  
+  acceptInvite(url: string, data: any): Observable<any> {
+    return this.http.put("/api/" + url, data).pipe(
+      catchError(this.handleError) 
+    );  
+  }
+
+  denyInvite(url: string, data: any): Observable<any> {
+    return this.http.patch("/api/" + url, data).pipe(
+      catchError(this.handleError) 
+    );  
+  }
   
   private handleError(error: any) {
     console.error('An error occurred:', error);
