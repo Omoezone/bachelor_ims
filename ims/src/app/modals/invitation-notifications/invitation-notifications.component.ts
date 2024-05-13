@@ -28,21 +28,16 @@ export class InvitationNotificationsComponent {
   ) {}
 
   acceptNotification(notification: any) {
-    // set the notification as accepted in db and update user's group list and remove from invties
-    // update db group
-    this.http.acceptInvite(`users/${this.userService.getUserId()}/acceptInvite`, notification.invToken).subscribe({
+    console.log(notification)
+    this.http.acceptInvite(`users/${this.userService.getUserId()}/acceptInvite`, { invToken: notification.invToken}).subscribe({
       next: (success) => {
-        console.log("invite accepted", success)
-        console.log('Invite accepted');
+        this.userService.setUserGroups(success.groups);
+        this.removeNotification(notification);
       },
       error: (error) => {
         console.log('Invite accept error:', error);
       }
     });
-    // update user's group list + invites
-
-    console.log('Accepted:', notification);
-    this.removeNotification(notification);
   }
 
   denyNotification(notification: any) {

@@ -46,7 +46,7 @@ export class NavbarComponent {
     private userService: UserService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private http: HttpServiceService
+    private http: HttpServiceService,
   ) {}
   isLoggedIn: boolean = false;
 
@@ -100,7 +100,7 @@ export class NavbarComponent {
       });
 
       dialogRef.afterClosed().subscribe(() => {
-
+        this.router.navigate(['/']);
       });
     } else {
     console.log("No notifications to show or user is not logged in.");

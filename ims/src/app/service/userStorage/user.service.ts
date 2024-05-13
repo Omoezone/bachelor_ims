@@ -63,6 +63,11 @@ export class UserService {
     }
   }
 
+  setUserGroups(groups: any) {
+    this.currentUser.groups = groups;
+    this.cookieService.set(this.user, JSON.stringify(this.currentUser));
+  }
+
   getUserInvites() {
     if (this.currentUser) {
       return this.currentUser.invites;

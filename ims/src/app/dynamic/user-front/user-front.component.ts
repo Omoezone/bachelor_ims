@@ -47,7 +47,9 @@ export class UserFrontComponent {
   ngOnInit() {
     this.userId = this.userService.getUserId();
     this.username = this.userService.getUserName();
-    console.log("user", this.userService.getUser());
+    this.getUserCollections();
+  }
+  getUserCollections() {
     this.http.getUserCollections(`users/${this.userId}/collections`).subscribe({
       next: (data: any) => {
         this.dataSource = data
