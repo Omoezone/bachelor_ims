@@ -46,13 +46,19 @@ export class InvitationNotificationsComponent {
   }
 
   denyNotification(notification: any) {
-    // set the acceptedAt in db without updating user's group list
-    console.log('Denied:', notification);
-    this.removeNotification(notification);
+    this.http.denyInvite(`users/${this.userService.getUserId()}/denyInvite`, notification.invId).subscribe({
+      next: (success) => {
+        this.removeNotification(notification);
+      },
+      error: (error) => {
+        console.log('Invite deny error:', error);
+      }
+    });
   }
 
   private removeNotification(notification: any) {
-    this.data.notification = this.data.notification.filter((n: any) => n !== notification);
+    this.userService.removeInvite(notification.invToken);
+    this.data.notification = this.data.notification.filter((n: any) => n.invToken !== notification.invToken);
   }
 
   closeDialog() {

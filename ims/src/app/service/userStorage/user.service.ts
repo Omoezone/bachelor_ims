@@ -74,4 +74,9 @@ export class UserService {
   getUserCookie() {
     return this.cookieService.get(this.user);
   }
+
+  removeInvite(invToken: string) {
+    this.currentUser.invites = this.currentUser.invites.filter((inv: any) => inv.invToken !== invToken);
+    this.cookieService.set(this.user, JSON.stringify(this.currentUser));
+  }
 }
