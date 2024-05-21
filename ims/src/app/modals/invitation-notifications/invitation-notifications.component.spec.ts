@@ -38,11 +38,11 @@ describe('InvitationNotificationsComponent', () => {
         HttpClientTestingModule,
         MatDialogModule,
         InvitationNotificationsComponent,
-        MatListModule // Make sure to import MatListModule if used in the component
+        MatListModule 
       ],
       providers: [
         { provide: MatDialogRef, useClass: MatDialogRefMock },
-        { provide: MAT_DIALOG_DATA, useValue: { notification: [] } }, // Ensure 'notification' is defined
+        { provide: MAT_DIALOG_DATA, useValue: { notification: [] } }, 
         { provide: HttpServiceService, useClass: HttpServiceServiceMock },
         { provide: UserService, useClass: UserServiceMock },
       ]
