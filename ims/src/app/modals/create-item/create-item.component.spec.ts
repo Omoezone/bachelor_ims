@@ -1,10 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateItemComponent } from './create-item.component';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { InjectionToken } from '@angular/core';
-
-const MAT_MDC_DIALOG_DATA = new InjectionToken<any>('MatMdcDialogData');
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 class MatDialogRefMock {
   close(): void {}
@@ -16,10 +14,13 @@ describe('CreateItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatDialogModule], 
+      imports: [
+        MatDialogModule,
+        BrowserAnimationsModule
+      ], 
       providers: [
         { provide: MatDialogRef, useClass: MatDialogRefMock },
-        { provide: MAT_MDC_DIALOG_DATA, useValue: {} }
+        { provide: MAT_DIALOG_DATA, useValue: {} },
       ] 
     })
     .compileComponents();
