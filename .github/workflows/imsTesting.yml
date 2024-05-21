@@ -28,10 +28,10 @@ jobs:
         cache: 'npm'
 
     - name: Install required dependecies
-      run: npm ci
+      run: npm ci --prefix ims
       
     - name: Build angular project
-      run: npm run build
+      run: npm run build --prefix ims
       
     - name: Run tests
-      run: npm run test
+      run: npm run test --prefix ims
