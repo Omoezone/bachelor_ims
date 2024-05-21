@@ -5,6 +5,7 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
 import { HttpServiceService } from '../../service/http/http-service.service';
 import { UserService } from '../../service/userStorage/user.service';
 import { of } from 'rxjs';
+import { MatListModule } from '@angular/material/list';
 
 class MatDialogRefMock {
   close(): void {}
@@ -36,11 +37,12 @@ describe('InvitationNotificationsComponent', () => {
       imports: [
         HttpClientTestingModule,
         MatDialogModule,
-        InvitationNotificationsComponent
+        InvitationNotificationsComponent,
+        MatListModule // Make sure to import MatListModule if used in the component
       ],
       providers: [
         { provide: MatDialogRef, useClass: MatDialogRefMock },
-        { provide: MAT_DIALOG_DATA, useValue: { notifications: [] } }, // Ensure 'notifications' is defined
+        { provide: MAT_DIALOG_DATA, useValue: { notification: [] } }, // Ensure 'notification' is defined
         { provide: HttpServiceService, useClass: HttpServiceServiceMock },
         { provide: UserService, useClass: UserServiceMock },
       ]
