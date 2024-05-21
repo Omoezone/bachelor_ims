@@ -1,6 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+
+class MatDialogRefMock {
+  close(): void {}
+}
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -8,7 +15,21 @@ describe('RegisterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RegisterComponent]
+      imports: [
+        RegisterComponent,
+        BrowserAnimationsModule,
+        MatDialogModule
+      ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {}
+        },
+        { 
+          provide: MatDialogRef, 
+          useClass: MatDialogRefMock 
+        }
+      ]
     })
     .compileComponents();
     

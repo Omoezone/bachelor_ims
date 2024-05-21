@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CreateCollectionComponent } from './create-collection.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+class MatDialogRefMock {
+  close(): void {}
+}
 
 describe('CreateCollectionComponent', () => {
   let component: CreateCollectionComponent;
@@ -8,9 +13,13 @@ describe('CreateCollectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CreateCollectionComponent]
-    })
-    .compileComponents();
+      imports: [
+        MatDialogModule, 
+        BrowserAnimationsModule,
+        CreateCollectionComponent
+      ],
+      providers: [{ provide: MatDialogRef, useClass: MatDialogRefMock }] 
+    }).compileComponents();
     
     fixture = TestBed.createComponent(CreateCollectionComponent);
     component = fixture.componentInstance;

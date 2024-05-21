@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { InviteGroupComponent } from './invite-group.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+
+class MatDialogRefMock {
+  close(): void {}
+}
 
 describe('InviteGroupComponent', () => {
   let component: InviteGroupComponent;
@@ -8,9 +13,13 @@ describe('InviteGroupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InviteGroupComponent]
-    })
-    .compileComponents();
+      imports: [
+        MatDialogModule,
+        BrowserAnimationsModule,
+        InviteGroupComponent
+      ],
+      providers: [{ provide: MatDialogRef, useClass: MatDialogRefMock }] 
+    }).compileComponents();
     
     fixture = TestBed.createComponent(InviteGroupComponent);
     component = fixture.componentInstance;

@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserFrontComponent } from './user-front.component';
+import { HttpClientModule } from '@angular/common/http'; 
+import { ActivatedRoute } from '@angular/router';
 
 describe('UserFrontComponent', () => {
   let component: UserFrontComponent;
@@ -8,7 +10,16 @@ describe('UserFrontComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UserFrontComponent]
+      imports: [
+        UserFrontComponent,
+        HttpClientModule
+      ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {}
+        }
+      ]
     })
     .compileComponents();
     

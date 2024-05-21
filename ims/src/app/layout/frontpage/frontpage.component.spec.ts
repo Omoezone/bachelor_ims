@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FrontpageComponent } from './frontpage.component';
+import { ActivatedRoute } from '@angular/router';
 
 describe('FrontpageComponent', () => {
   let component: FrontpageComponent;
@@ -8,9 +8,9 @@ describe('FrontpageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FrontpageComponent]
-    })
-    .compileComponents();
+      imports: [FrontpageComponent], 
+      providers: [ { provide: ActivatedRoute, useValue: {} } ]
+    }).compileComponents();
     
     fixture = TestBed.createComponent(FrontpageComponent);
     component = fixture.componentInstance;

@@ -1,6 +1,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { InvitationNotificationsComponent } from './invitation-notifications.component';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HttpServiceService } from '../../service/http/http-service.service';
+import { UserService } from '../../service/userStorage/user.service';
+import { of } from 'rxjs';
+
+class MatDialogRefMock {
+  close(): void {}
+}
+
+class HttpServiceServiceMock {
+  acceptInvite() {
+    return of({ groups: [] }); 
+  }
+  denyInvite() {
+    return of({}); 
+  }
+}
+
+class UserServiceMock {
+  getUserId() {
+    return '123'; 
+  }
+  setUserGroups(groups: any) {}
+  removeInvite(invToken: string) {}
+}
 
 describe('InvitationNotificationsComponent', () => {
   let component: InvitationNotificationsComponent;
@@ -8,10 +33,19 @@ describe('InvitationNotificationsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InvitationNotificationsComponent]
-    })
-    .compileComponents();
-    
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule,
+        InvitationNotificationsComponent
+      ],
+      providers: [
+        { provide: MatDialogRef, useClass: MatDialogRefMock },
+        { provide: MAT_DIALOG_DATA, useValue: { notifications: [] } }, // Ensure 'notifications' is defined
+        { provide: HttpServiceService, useClass: HttpServiceServiceMock },
+        { provide: UserService, useClass: UserServiceMock },
+      ]
+    }).compileComponents();
+
     fixture = TestBed.createComponent(InvitationNotificationsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
