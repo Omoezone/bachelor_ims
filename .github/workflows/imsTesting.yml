@@ -4,9 +4,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "pipeTest" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "pipeTest" ]
 
 jobs:
   build:
@@ -27,11 +27,14 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
+    - name: locate the project
+      run: cd ims
+
     - name: Install required dependecies
-      run: npm ci --prefix ims
+      run: npm ci 
       
     - name: Build angular project
-      run: npm run build --prefix ims
+      run: npm run build
       
     - name: Run tests
-      run: npm run test --prefix ims
+      run: npm run test
