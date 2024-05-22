@@ -1,6 +1,6 @@
 # Pipeline for the IMS project used for testing continuesly testing
 
-name: Node.js CI
+name: Testing IMS
 
 on:
   push:
@@ -27,14 +27,14 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    - name: locate the project
-      run: cd ims
+    - name: Install required dependencies
+      run: npm ci
+      working-directory: ims
 
-    - name: Install required dependecies
-      run: npm ci 
-      
     - name: Build angular project
       run: npm run build
+      working-directory: ims
       
     - name: Run tests
       run: npm run test
+      working-directory: ims
