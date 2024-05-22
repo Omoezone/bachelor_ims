@@ -26,6 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: ./ims/package-lock.json
 
     - name: Install required dependencies
       run: npm ci
