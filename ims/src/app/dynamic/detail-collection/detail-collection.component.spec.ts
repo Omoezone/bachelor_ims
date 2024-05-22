@@ -9,7 +9,6 @@ describe('DetailCollectionComponent', () => {
   let component: DetailCollectionComponent;
   let fixture: ComponentFixture<DetailCollectionComponent>;
 
-  // Mock ActivatedRoute
   const activatedRouteMock = {
     snapshot: {
       paramMap: {
@@ -41,6 +40,4 @@ describe('DetailCollectionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  
 });

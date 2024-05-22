@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AllItemsComponent } from './all-items.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AllItemsComponent', () => {
   let component: AllItemsComponent;
@@ -11,7 +11,7 @@ describe('AllItemsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         AllItemsComponent,
-        HttpClientModule
+        HttpClientTestingModule
       ]
     })
     .compileComponents();
