@@ -73,4 +73,7 @@ export class RegisterComponent {
     });
     }
   }
+  public openSnackBar(message: string, action: string, duration: number) {
+    this.snackBar.open(message, action, { duration });
+  }
 }
