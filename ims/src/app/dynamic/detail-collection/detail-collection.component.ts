@@ -13,6 +13,7 @@ import { MatButton } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmationComponent } from '../../modals/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-detail-collection',
@@ -87,7 +88,7 @@ export class DetailCollectionComponent {
             this.http.postItem(`items`, result, params).subscribe({
               next: (data: any) =>
                 {
-                  this.dataSource = [...this.dataSource, result];
+                  this.dataSource = [...this.dataSource, data];
                   this.snackBar.open('Item added successful!', 'Close', {
                     duration: 2000, 
                   });
@@ -100,11 +101,22 @@ export class DetailCollectionComponent {
   }
 
   deleteItem(item: any) {
-    this.http.deleteItem(`items/${item.itemId}`).subscribe({
-      next: (data: any) => {
-        this.dataSource = this.dataSource.filter((element: any) => element.itemId !== item.itemId);
-      },
-      error: (error: any) => console.error('There was an error!', error)
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: '350px',
+      data: {
+        message: 'Are you sure you want to delete this item?'
+      }
+    });
+    console.log("itemStuff", item);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.http.deleteItem(`items/${item.itemId}`).subscribe({
+          next: (data: any) => {
+            this.dataSource = this.dataSource.filter((element: any) => element.itemId !== item.itemId);
+          },
+          error: (error: any) => console.error('There was an error!', error)
+        });
+      }
     });
   }
 

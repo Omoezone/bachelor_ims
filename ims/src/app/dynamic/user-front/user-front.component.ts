@@ -82,8 +82,8 @@ export class UserFrontComponent {
     const dialogRef = this.dialog.open(ConfirmationComponent, {
       width: '350px',
       data: {
-        message: 'Are you sure you want to delete this collection?'
-      }
+        message: 'Are you sure you want to delete this collection? All items in this collection will be deleted.'
+      } 
     });
   
     dialogRef.afterClosed().subscribe(result => {
