@@ -81,7 +81,6 @@ export class DetailCollectionComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log("result: ", result, this.collectionId)
       if (result) {      
           if (this.collectionId) {
             const params = new HttpParams().set('collectionId', this.collectionId.toString());

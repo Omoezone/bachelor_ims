@@ -53,7 +53,6 @@ export class UserFrontComponent {
     this.http.getUserCollections(`users/${this.userId}/collections`).subscribe({
       next: (data: any) => {
         this.dataSource = data
-        console.log("dataFetch: ", data)
       },
       error: (error: any) => console.error('There was an error!', error)
     });
@@ -68,7 +67,6 @@ export class UserFrontComponent {
         const params = new HttpParams().set('userId', this.userId.toString());
         this.http.postCollection(`collections`, { "name": result.collectionName, "groupId": result.groupId }, params).subscribe({
           next: (data: any) => {
-            console.log("dataFetch2: ", data)
             this.dataSource = [...this.dataSource, data];
             this.snackBar.open('Collection added successful!', 'Close', {
               duration: 2000, 

@@ -54,7 +54,6 @@ export class AllItemsComponent {
   }
 
   exportCollection(): void {
-    console.log("datasource this: ", this.dataSource)
     this.pdfService.generatePDF({ content: this.dataSource });
   }
 

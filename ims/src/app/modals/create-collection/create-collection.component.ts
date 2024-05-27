@@ -35,7 +35,6 @@ export class CreateCollectionComponent {
     private userService: UserService
   ) {
     this.groups = this.userService.getUserGroups();
-    console.log("groups2", this.groups);
   }
 
   onNoClick(): void {

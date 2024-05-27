@@ -1,0 +1,25 @@
+/* Add this CSS to your global styles or component-specific styles file */
+
+/* Center the form horizontally */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Add some spacing between form elements */
+  mat-form-field {
+    width: 300px; /* Adjust width as needed */
+    margin-bottom: 20px;
+  }
+  
+  /* Style the buttons */
+  .mat-dialog-actions button {
+    margin-right: 10px; /* Add margin to the right of the buttons */
+  }
+  
+  /* Align buttons to the center */
+  .mat-dialog-actions {
+    justify-content: center;
+  }
+  

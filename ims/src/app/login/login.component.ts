@@ -51,14 +51,11 @@ export class LoginComponent {
     this.authGuard.canActivate();
     const { email, password } = this.loginForm.value;
     this.httpService.login("login", email!, password!).subscribe({
-      next: (success) => {
-        console.log('Login successful');
-        
+      next: (success) => {        
         this.cookieService.set('authToken', success.token);
         this.cookieService.set('user', JSON.stringify(success.user));
         this.userService.setUser(success.user);
         this.authService.login();
-        console.log('User:', success.user);
         this.router.navigate(['/userFrontPage']); 
 
         this.snackBar.open('Login successful!', 'Close', {

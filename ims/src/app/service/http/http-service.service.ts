@@ -87,6 +87,12 @@ export class HttpServiceService {
   }
 
   // Groups
+  createGroup(url: string, data: any): Observable<any> {
+    return this.http.post("/api/" + url, data).pipe(
+      catchError(this.handleError) 
+    );  
+  }
+
   postInvite(url: string, data: any): Observable<any> {
     return this.http.post("/api/" + url, data).pipe(
       catchError(this.handleError) 

@@ -21,6 +21,7 @@ import { AllItemsComponent } from './dynamic/all-items/all-items.component';
 import { ConfirmationComponent } from './modals/confirmation/confirmation.component';
 import { InviteGroupComponent } from './modals/invite-group/invite-group.component';
 import { InvitationNotificationsComponent } from './modals/invitation-notifications/invitation-notifications.component';
+import { CreateGroupComponent } from './modals/create-group/create-group.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { InvitationNotificationsComponent } from './modals/invitation-notificati
     UserProfileComponent,
     AllItemsComponent,
     InviteGroupComponent,
-    InvitationNotificationsComponent
+    InvitationNotificationsComponent,
+    CreateGroupComponent
   ],
   providers: [
     provideClientHydration(),

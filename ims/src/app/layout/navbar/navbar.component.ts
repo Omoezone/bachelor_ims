@@ -9,6 +9,7 @@ import { AuthService } from '../../service/auth/auth.service';
 import { HttpServiceService } from '../../service/http/http-service.service';
 import { InviteGroupComponent } from '../../modals/invite-group/invite-group.component';
 import { InvitationNotificationsComponent } from '../../modals/invitation-notifications/invitation-notifications.component';
+import { CreateGroupComponent } from '../../modals/create-group/create-group.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -85,13 +86,37 @@ export class NavbarComponent {
       }
     });
   }
+
+  createNewGroup() {
+    const dialogRef = this.dialog.open(CreateGroupComponent, {
+      width: '30%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.http.createGroup(`users/${this.userService.getUserId()}/group`,{ groupName: result.groupName }).subscribe({
+          next: (data: any) => {
+            this.userService.setUserGroups(data);
+            this.snackBar.open('New group successfully created!', 'Close', {
+              duration: 2000,
+            });
+          },
+          error: (error: any) => {
+            this.snackBar.open('Failed to create group, please try again later', 'Close', {
+              duration: 5000,
+            });
+          }
+        });
+      }
+    });
+  }
+
   get userInvitesCount(): number {
     return this.userService.getUserInvites().length;
   }
 
   showNotifications() {
     const user = this.userService.getUser();
-    console.log(user)
     if (user && user.invites) {
       const dialogRef = this.dialog.open(InvitationNotificationsComponent, {
         width: '40%', 

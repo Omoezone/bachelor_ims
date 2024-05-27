@@ -51,11 +51,8 @@ export class UserProfileComponent {
     });
   }
   onSubmit() {
-    console.log('Form Submitted', this.userUpdateForm.value)
     this.http.updateUser(`users/${this.userService.getUserId()}`, this.userUpdateForm.value).subscribe({
       next: (response) => {
-        console.log('User updated successfully:', response);
-        
         this.userService.setUser(this.userUpdateForm.value);
         this.router.navigate(['/userFrontPage']); 
 
