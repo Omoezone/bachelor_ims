@@ -1,4 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+    <h1>collection: {{ collectionName }}</h1>
 
     <div fxLayout="row" fxLayoutGap="80px" fxLayoutAlign="center center" style="margin-bottom: 40px;">
         <button mat-button (click)="goBack()"><mat-icon>arrow_back</mat-icon>Go Back</button>
@@ -47,9 +48,9 @@
                     <mat-cell *matCellDef="let element">
                         <button mat-icon-button color="primary" (click)="updateItem(element)" aria-label="Update">
                             <mat-icon>edit</mat-icon>
-                        </button>
+                        </button><br>
                         <button mat-icon-button color="warn" (click)="deleteItem(element)" aria-label="Delete">
-                            <mat-icon>close</mat-icon> 
+                            <mat-icon>close</mat-icon>  
                         </button>
                     </mat-cell>
                 </ng-container>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpParams } from '@angular/common/http';
 
@@ -41,7 +41,8 @@ export class UserFrontComponent {
     private http: HttpServiceService,
     private userService: UserService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -103,7 +104,6 @@ export class UserFrontComponent {
   }
 
   goBack(): void {
-    window.history.back();
+    this.router.navigate(['/']);
   }
-
 }

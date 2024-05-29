@@ -9,9 +9,9 @@ import { PdfGeneratorService } from '../../service/pdfGenerator/pdf-generator.se
 import { HttpServiceService } from '../../service/http/http-service.service';
 
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { ConfirmationComponent } from '../../modals/confirmation/confirmation.component';
@@ -21,10 +21,10 @@ import { ConfirmationComponent } from '../../modals/confirmation/confirmation.co
   standalone: true,
   imports: [
     MatTableModule,
-    MatButton,
+    MatButtonModule,
     CommonModule,
     MatDialogModule,
-    MatIcon,
+    MatIconModule,
     MatSortModule,
     MatSnackBarModule
   ],
@@ -35,6 +35,7 @@ export class DetailCollectionComponent{
   displayedColumns: string[] = ['name', 'price', 'type', 'dimensions', 'color', 'amount', 'actions'];
   dataSource = new MatTableDataSource<any>([]); 
   collectionId: string = '';
+  collectionName: string = '';
 
   itemName: string = '';
   itemPrice: number = 0;
@@ -61,7 +62,11 @@ export class DetailCollectionComponent{
         this.http.getItemCollections(`collections/${this.collectionId}/items`).subscribe({
           next: (data: any) =>
             {
+              setTimeout(() => {
+                this.dataSource.sort = this.sort;
+              }, 500);
               this.dataSource.data = data.items;
+              this.collectionName = data.collectionName;
             },
           error: (error: any) => console.error('There was an error!', error)
         });
@@ -73,8 +78,8 @@ export class DetailCollectionComponent{
     setTimeout(() => {
       this.dataSource.sort = this.sort;
     }, 1000);
-    console.log("datasource sort ", this.dataSource.sort);
   }
+
   createItem(): void {
     const itemData: ItemsBase = {
       name: this.itemName,
