@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ItemsBase, Items } from '../../types/items';
 import { HttpParams } from '@angular/common/http';
@@ -8,31 +8,22 @@ import { CreateItemComponent } from '../../modals/create-item/create-item.compon
 import { PdfGeneratorService } from '../../service/pdfGenerator/pdf-generator.service';
 import { HttpServiceService } from '../../service/http/http-service.service';
 
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButton } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { ConfirmationComponent } from '../../modals/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-detail-collection',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatButton,
-    CommonModule,
-    CreateItemComponent,
-    MatDialogModule,
-    MatIcon,
-    MatSnackBarModule
-  ],
   templateUrl: './detail-collection.component.html',
   styleUrl: './detail-collection.component.scss'
 })
-export class DetailCollectionComponent {
+export class DetailCollectionComponent{
   displayedColumns: string[] = ['name', 'price', 'type', 'dimensions', 'color', 'amount', 'actions'];
-  dataSource!: any;
+  dataSource = new MatTableDataSource<any>([]); 
   collectionId: string = '';
 
   itemName: string = '';
@@ -40,8 +31,10 @@ export class DetailCollectionComponent {
   itemAmount: number = 0;
   itemType: string = '';
   itemWidth: number = 0;
-  itemHeight: number = 0;
+  itemHeight: number = 0; 
   itemColor: string = '';
+
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private route: ActivatedRoute, 
@@ -58,12 +51,19 @@ export class DetailCollectionComponent {
         this.http.getItemCollections(`collections/${this.collectionId}/items`).subscribe({
           next: (data: any) =>
             {
-              this.dataSource = data.items;
+              this.dataSource.data = data.items;
             },
           error: (error: any) => console.error('There was an error!', error)
         });
       }
     }); 
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.dataSource.sort = this.sort;
+    }, 1000);
+    console.log("datasource sort ", this.dataSource.sort);
   }
   createItem(): void {
     const itemData: ItemsBase = {
@@ -88,10 +88,11 @@ export class DetailCollectionComponent {
             this.http.postItem(`items`, result, params).subscribe({
               next: (data: any) =>
                 {
-                  this.dataSource = [...this.dataSource, data];
+                  this.dataSource.data = [...this.dataSource.data, data];
                   this.snackBar.open('Item added successful!', 'Close', {
                     duration: 2000, 
                   });
+                  this.dataSource.sort = this.sort;
                 },
               error: (error: any) => console.error('There was an error!', error)
             });
@@ -112,7 +113,8 @@ export class DetailCollectionComponent {
       if (result) {
         this.http.deleteItem(`items/${item.itemId}`).subscribe({
           next: (data: any) => {
-            this.dataSource = this.dataSource.filter((element: any) => element.itemId !== item.itemId);
+            this.dataSource.data = this.dataSource.data.filter((element: any) => element.itemId !== item.itemId);
+            this.dataSource.sort = this.sort;
           },
           error: (error: any) => console.error('There was an error!', error)
         });
@@ -139,13 +141,14 @@ export class DetailCollectionComponent {
         if (result) {
             this.http.updateItem(`items/${item.itemId}`, result).subscribe({
                 next: (data: any) => {
-                  const index = this.dataSource.findIndex((i: any) => i.itemId === item.itemId);
+                  const index = this.dataSource.data.findIndex((i: any) => i.itemId === item.itemId);
                   if (index !== -1) {
-                      this.dataSource[index] = result;
-                      this.dataSource = [...this.dataSource]; 
+                      this.dataSource.data[index] = result;
+                      this.dataSource.data = [...this.dataSource.data]; 
                       this.snackBar.open('Item updated successful!', 'Close', {
                         duration: 2000, 
                       });
+                      this.dataSource.sort = this.sort;
                   }
                 },
                 error: (error: any) => console.error('There was an error!', error)
@@ -154,7 +157,7 @@ export class DetailCollectionComponent {
     });
   }
   exportCollection(): void {
-    this.pdfService.generatePDF({ content: this.dataSource });
+    this.pdfService.generatePDF({ content: this.dataSource.data });
   }
   goBack(): void {
     window.history.back();

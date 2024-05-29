@@ -22,12 +22,20 @@ import { ConfirmationComponent } from './modals/confirmation/confirmation.compon
 import { InviteGroupComponent } from './modals/invite-group/invite-group.component';
 import { InvitationNotificationsComponent } from './modals/invitation-notifications/invitation-notifications.component';
 import { CreateGroupComponent } from './modals/create-group/create-group.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatButton } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfirmationComponent,
+    DetailCollectionComponent
     ],
   imports: [
     BrowserModule,
@@ -40,7 +48,6 @@ import { CreateGroupComponent } from './modals/create-group/create-group.compone
     FlexLayoutModule,
     FlexLayoutServerModule,
     CreateCollectionComponent,
-    DetailCollectionComponent,
     CreateItemComponent,
     LearnMoreComponent,
     LoginComponent,
@@ -48,7 +55,15 @@ import { CreateGroupComponent } from './modals/create-group/create-group.compone
     AllItemsComponent,
     InviteGroupComponent,
     InvitationNotificationsComponent,
-    CreateGroupComponent
+    CreateGroupComponent,
+    MatTableModule,
+    MatButton,
+    CommonModule,
+    CreateItemComponent,
+    MatDialogModule,
+    MatIcon,
+    MatSortModule,
+    MatSnackBarModule
   ],
   providers: [
     provideClientHydration(),
