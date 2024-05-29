@@ -35,7 +35,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   declarations: [
     AppComponent,
     ConfirmationComponent,
-    DetailCollectionComponent
     ],
   imports: [
     BrowserModule,
@@ -51,8 +50,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     CreateItemComponent,
     LearnMoreComponent,
     LoginComponent,
-    UserProfileComponent,
+    DetailCollectionComponent,
     AllItemsComponent,
+    UserProfileComponent,
     InviteGroupComponent,
     InvitationNotificationsComponent,
     CreateGroupComponent,

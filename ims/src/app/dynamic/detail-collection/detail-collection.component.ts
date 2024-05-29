@@ -18,6 +18,16 @@ import { ConfirmationComponent } from '../../modals/confirmation/confirmation.co
 
 @Component({
   selector: 'app-detail-collection',
+  standalone: true,
+  imports: [
+    MatTableModule,
+    MatButton,
+    CommonModule,
+    MatDialogModule,
+    MatIcon,
+    MatSortModule,
+    MatSnackBarModule
+  ],
   templateUrl: './detail-collection.component.html',
   styleUrl: './detail-collection.component.scss'
 })
