@@ -41,7 +41,7 @@ export class DetailCollectionComponent{
 
   itemName: string = '';
   itemPrice: number = 0;
-  itemAmount: number = 0;
+  itemAmount: number = 1;
   itemType: string = '';
   itemWidth: number = 0;
   itemHeight: number = 0; 

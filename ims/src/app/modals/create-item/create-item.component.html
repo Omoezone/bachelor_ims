@@ -1,36 +1,53 @@
 <h2 mat-dialog-title>Create New Item</h2>
 <mat-dialog-content>
-    <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput [(ngModel)]="data.name">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Price</mat-label>
-        <input matInput type="number" [(ngModel)]="data.price">
-    </mat-form-field>
-    <mat-form-field >
-        <mat-label>Amount</mat-label>
-        <input matInput type="number" [(ngModel)]="data.amount">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Type</mat-label>
-        <input matInput [(ngModel)]="data.type">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Width</mat-label>
-        <input matInput type="number" [(ngModel)]="data.width">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Height</mat-label>
-        <input matInput type="number" [(ngModel)]="data.height">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Color</mat-label>
-        <input matInput [(ngModel)]="data.color">
-    </mat-form-field>
+    <form [formGroup]="itemForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name">
+            <mat-error *ngIf="itemForm.controls['name'].invalid && itemForm.controls['name'].touched">Name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" formControlName="price">
+            <mat-error *ngIf="itemForm.controls['price'].invalid && itemForm.controls['price'].touched">
+                Price must over 1
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Amount</mat-label>
+            <input matInput type="number" formControlName="amount">
+            <mat-error *ngIf="itemForm.controls['amount'].invalid && itemForm.controls['amount'].touched">
+                Allowed values is (1->1000)
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Type</mat-label>
+            <input matInput formControlName="type">
+            <mat-error *ngIf="itemForm.controls['type'].invalid && itemForm.controls['type'].touched">Type is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Width</mat-label>
+            <input matInput type="number" formControlName="width">
+            <mat-error *ngIf="itemForm.controls['width'].invalid && itemForm.controls['width'].touched">
+                Allowed values is (1->10000)
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Height</mat-label>
+            <input matInput type="number" formControlName="height">
+            <mat-error *ngIf="itemForm.controls['height'].invalid && itemForm.controls['height'].touched">
+                Allowed values is (1->10000)
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Color</mat-label>
+            <input matInput formControlName="color">
+            <mat-error *ngIf="itemForm.controls['color'].invalid && itemForm.controls['color'].touched">Color is required</mat-error>
+        </mat-form-field>
+    </form>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button color="warn" (click)="onNoClick()">Cancel</button>
     <span class="spacer"></span>
-    <button mat-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+    <button mat-button color="primary" [disabled]="itemForm.invalid" (click)="onSaveClick()" cdkFocusInitial>Save</button>
 </mat-dialog-actions>

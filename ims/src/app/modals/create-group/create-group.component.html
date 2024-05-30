@@ -1,14 +1,17 @@
 <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-      <mat-label>Group Name: </mat-label>
-      <input matInput formControlName="groupName" required>
-      <mat-error *ngIf="groupForm.get('groupName')!.hasError('required')">
-        Group name is required
-      </mat-error>
-    </mat-form-field>
-    <div mat-dialog-actions>
-      <button mat-raised-button color="primary" type="button" (click)="onNoClick()">Cancel</button>
-      <button mat-raised-button color="warn" type="submit">Create</button>
-    </div>
-  </form>
+  <div mat-dialog-content>
+    <h1>Create new group</h1>
+    <p>Enter the name of the group you want to create.</p>
+  <mat-form-field>
+    <input matInput formControlName="groupName" required>
+    <mat-error *ngIf="groupForm.get('groupName')!.hasError('required')">
+      Group name is required
+    </mat-error>
+  </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button color="warn" type="button" (click)="onNoClick()">Cancel</button>
+    <button mat-button color="primary" [disabled]="!groupForm.valid" type="submit">Create</button>
+  </div>
+</form>
   

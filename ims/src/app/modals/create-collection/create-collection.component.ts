@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 import { UserService } from '../../service/userStorage/user.service';
 
@@ -40,4 +40,13 @@ export class CreateCollectionComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  onSaveClick(form: NgForm): void {
+    if (form.valid) {
+      this.dialogRef.close({ collectionName: this.collectionName, groupId: this.selectedGroupId });
+    } else {
+      form.control.markAllAsTouched();  
+    }
+  }
+  
 }

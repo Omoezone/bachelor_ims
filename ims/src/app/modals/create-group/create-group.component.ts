@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-group',
@@ -11,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     MatInputModule,
+    MatDialogModule,
     ReactiveFormsModule,
     MatButtonModule
   ],
@@ -30,12 +32,10 @@ export class CreateGroupComponent {
   }
 
   onNoClick(): void {
-    console.log('No click');
     this.dialogRef.close();
   }
 
   onSubmit(): void {
-    console.log('Submit');
     if (this.groupForm.valid) {
       this.dialogRef.close(this.groupForm.value);
     }
