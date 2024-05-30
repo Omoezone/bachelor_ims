@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ItemsBase, Items } from '../../types/items';
 import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CreateItemComponent } from '../../modals/create-item/create-item.component';
 import { PdfGeneratorService } from '../../service/pdfGenerator/pdf-generator.service';
@@ -17,12 +18,13 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { ConfirmationComponent } from '../../modals/confirmation/confirmation.component';
 
 @Component({
-  selector: 'app-detail-collection',
+  selector: 'app-detail-collection', 
   standalone: true,
   imports: [
     MatTableModule,
     MatButtonModule,
     CommonModule,
+    FlexLayoutModule,
     MatDialogModule,
     MatIconModule,
     MatSortModule,
@@ -56,6 +58,7 @@ export class DetailCollectionComponent{
   ) {}
 
   ngOnInit(): void {
+    console.log("collectionName", this.collectionName)
     this.route.paramMap.subscribe(params => {
       this.collectionId = params.get('id') ?? '';
       if (this.collectionId) {
@@ -66,7 +69,10 @@ export class DetailCollectionComponent{
                 this.dataSource.sort = this.sort;
               }, 500);
               this.dataSource.data = data.items;
+              console.log("collectionName1", data.collectionName, "and", this.collectionName);
               this.collectionName = data.collectionName;
+              console.log("collectionName2", data.collectionName, "and", this.collectionName);
+
             },
           error: (error: any) => console.error('There was an error!', error)
         });

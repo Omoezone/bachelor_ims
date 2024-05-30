@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
-    <h1>collection: {{ collectionName }}</h1>
+    <h1>Current Collection: {{ collectionName }}</h1>
 
     <div fxLayout="row" fxLayoutGap="80px" fxLayoutAlign="center center" style="margin-bottom: 40px;">
         <button mat-button (click)="goBack()"><mat-icon>arrow_back</mat-icon>Go Back</button>
@@ -9,7 +9,7 @@
 
     <div style="width: 60%; max-width: 100%;">
         <ng-container *ngIf="(dataSource?.data ?? []).length > 0; else noDataTemplate">
-            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;">
 
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
