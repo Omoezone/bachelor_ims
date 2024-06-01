@@ -15,6 +15,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { ConfirmationComponent } from '../../modals/confirmation/confirmation.component';
 
 @Component({
@@ -28,6 +29,7 @@ import { ConfirmationComponent } from '../../modals/confirmation/confirmation.co
     MatDialogModule,
     MatIconModule,
     MatSortModule,
+    MatPaginatorModule,
     MatSnackBarModule
   ],
   templateUrl: './detail-collection.component.html',
@@ -48,7 +50,8 @@ export class DetailCollectionComponent{
   itemColor: string = '';
 
   @ViewChild(MatSort) sort!: MatSort;
-
+  @ViewChild(MatPaginator) paginator!: MatPaginator;  
+  
   constructor(
     private route: ActivatedRoute, 
     private http: HttpServiceService,
@@ -58,7 +61,6 @@ export class DetailCollectionComponent{
   ) {}
 
   ngOnInit(): void {
-    console.log("collectionName", this.collectionName)
     this.route.paramMap.subscribe(params => {
       this.collectionId = params.get('id') ?? '';
       if (this.collectionId) {
@@ -67,12 +69,10 @@ export class DetailCollectionComponent{
             {
               setTimeout(() => {
                 this.dataSource.sort = this.sort;
+                this.dataSource.paginator = this.paginator;
               }, 500);
               this.dataSource.data = data.items;
-              console.log("collectionName1", data.collectionName, "and", this.collectionName);
               this.collectionName = data.collectionName;
-              console.log("collectionName2", data.collectionName, "and", this.collectionName);
-
             },
           error: (error: any) => console.error('There was an error!', error)
         });
@@ -83,6 +83,7 @@ export class DetailCollectionComponent{
   ngAfterViewInit() {
     setTimeout(() => {
       this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     }, 1000);
   }
 
@@ -104,6 +105,7 @@ export class DetailCollectionComponent{
                     duration: 2000, 
                   });
                   this.dataSource.sort = this.sort;
+                  this.dataSource.paginator = this.paginator;
                 },
               error: (error: any) => console.error('There was an error!', error)
             });
@@ -125,6 +127,7 @@ export class DetailCollectionComponent{
           next: (data: any) => {
             this.dataSource.data = this.dataSource.data.filter((element: any) => element.itemId !== item.itemId);
             this.dataSource.sort = this.sort;
+            this.dataSource.paginator = this.paginator;
             this.snackBar.open('Item deleted successfully!', 'Close', { duration: 2000 });
           },
           error: (error: any) => console.error('There was an error!', error)
@@ -160,6 +163,7 @@ export class DetailCollectionComponent{
                         duration: 2000, 
                       });
                       this.dataSource.sort = this.sort;
+                      this.dataSource.paginator = this.paginator;
                   }
                 },
                 error: (error: any) => console.error('There was an error!', error)
@@ -172,5 +176,5 @@ export class DetailCollectionComponent{
   }
   goBack(): void {
     window.history.back();
-  }
+  } 
 }

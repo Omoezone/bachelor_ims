@@ -9,6 +9,7 @@
 
     <div class="table-container">
         <ng-container *ngIf="(dataSource?.data ?? []).length > 0; else noDataTemplate">
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
             <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;">
 
                 <ng-container matColumnDef="name">

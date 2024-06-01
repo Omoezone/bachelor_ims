@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -9,10 +9,12 @@ import { UserService } from '../../service/userStorage/user.service';
 import { CreateCollectionComponent } from '../../modals/create-collection/create-collection.component';
 import { ConfirmationComponent } from '../../modals/confirmation/confirmation.component';
 
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -25,6 +27,8 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
     MatIconModule,
     MatDialogModule,
+    MatSortModule,
+    MatPaginatorModule,
     RouterLink,
     MatSnackBarModule
   ],
@@ -32,10 +36,13 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './user-front.component.scss'
 })
 export class UserFrontComponent {
-  displayedColumns: string[] = ['name', 'groupName', 'amountItems', 'actions'];
-  dataSource!: any;;
+  displayedColumns: string[] = ['name', 'groupName', 'itemCount', 'actions'];
+  dataSource = new MatTableDataSource<any>([]); 
   userId: any;
   username: string = 'PLACEHOLDER';
+
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;  
 
   constructor(
     private http: HttpServiceService,
@@ -48,16 +55,26 @@ export class UserFrontComponent {
   ngOnInit() {
     this.userId = this.userService.getUserId();
     this.username = this.userService.getUserName();
-    this.getUserCollections();
-  }
-  getUserCollections() {
     this.http.getUserCollections(`users/${this.userId}/collections`).subscribe({
       next: (data: any) => {
-        this.dataSource = data
+        setTimeout(() => {
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+        }, 500);
+        this.dataSource.data = data 
+        console.log('Data:', this.dataSource)
       },
       error: (error: any) => console.error('There was an error!', error)
     });
   }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    }, 1000);
+  }
+  
   newCollection() {
     const dialogRef = this.dialog.open(CreateCollectionComponent, {
       width: '30%'
@@ -68,10 +85,12 @@ export class UserFrontComponent {
         const params = new HttpParams().set('userId', this.userId.toString());
         this.http.postCollection(`collections`, { "name": result.collectionName, "groupId": result.groupId }, params).subscribe({
           next: (data: any) => {
-            this.dataSource = [...this.dataSource, data];
+            this.dataSource.data = [...this.dataSource.data, data];
             this.snackBar.open('Collection added successful!', 'Close', {
               duration: 2000, 
             });
+            this.dataSource.sort = this.sort;
+            this.dataSource.paginator = this.paginator;
           },
           error: (error: any) => console.error('There was an error!', error)
         });
@@ -91,7 +110,9 @@ export class UserFrontComponent {
       if (result) {
         this.http.deleteCollection(`collections/${collection.collectionId}`).subscribe({
           next: (data: any) => {
-            this.dataSource = this.dataSource.filter((element: any) => element.collectionId !== collection.collectionId);
+            this.dataSource.data = this.dataSource.data.filter((element: any) => element.collectionId !== collection.collectionId);
+            this.dataSource.sort = this.sort;
+            this.dataSource.paginator = this.paginator;
             this.snackBar.open('Collection deleted successfully!', 'Close', { duration: 2000 });
           },
           error: (error: any) => {
