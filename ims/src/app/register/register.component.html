@@ -1,8 +1,17 @@
-<div fxLayout="row" fxLayoutGap="80px" fxLayoutAlign="center center" style="margin-bottom: 40px;">
-  <h1>Register User</h1>
+<div fxLayout="column" fxLayoutAlign="center center" fxFlexFill class="collection-container">
+
+<div fxLayout="column" fxLayoutGap="40px" fxLayoutAlign="center center" style="margin-bottom: 40px;">
   <button mat-button routerLink="/"><mat-icon>arrow_back</mat-icon>Go Back</button>
-</div>
-<div class="form-container">
+</div> 
+
+
+<div class="form-container" fxLayout="column" fxLayoutAlign="center center">
+  <div class="form-header" style="margin-bottom: 20px; padding: 40px;">
+    <h2>Register</h2>
+    <p>Please fill in the form to register a new user. All fields are required.</p>
+  </div>
+  
+  
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form-field">
       <div class="field-container">
         <mat-form-field appearance="fill">
@@ -13,7 +22,6 @@
         </mat-form-field>
       </div>
   
-      <!-- Last Name -->
       <div class="field-container">
         <mat-form-field appearance="fill">
           <mat-label>Last Name</mat-label>
@@ -22,7 +30,6 @@
         </mat-form-field>
       </div>
   
-      <!-- Email -->
       <div class="field-container">
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
@@ -31,7 +38,6 @@
         </mat-form-field>
       </div>
   
-      <!-- Password -->
       <div class="field-container">
         <mat-form-field appearance="fill">
           <mat-label>Password</mat-label>
@@ -40,7 +46,6 @@
         </mat-form-field>
       </div>
   
-      <!-- Age -->
       <div class="field-container">
         <mat-form-field appearance="fill">
           <mat-label>Age</mat-label>
@@ -49,7 +54,6 @@
         </mat-form-field>
       </div>
   
-      <!-- Gender -->
       <div class="field-container">
         <mat-form-field appearance="fill">
           <mat-label>Gender</mat-label>
@@ -63,8 +67,7 @@
         </mat-form-field>
       </div>
   
-      <!-- Submit Button -->
       <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">Register</button>
     </form>
   </div>
-      
+</div>
