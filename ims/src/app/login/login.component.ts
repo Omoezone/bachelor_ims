@@ -12,6 +12,7 @@ import { AuthGuardService } from '../service/authGuard/auth-guard.service';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatButtonModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'

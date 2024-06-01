@@ -129,13 +129,13 @@ export class DetailCollectionComponent{
         message: 'Are you sure you want to delete this item?'
       }
     });
-    console.log("itemStuff", item);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.http.deleteItem(`items/${item.itemId}`).subscribe({
           next: (data: any) => {
             this.dataSource.data = this.dataSource.data.filter((element: any) => element.itemId !== item.itemId);
             this.dataSource.sort = this.sort;
+            this.snackBar.open('Item deleted successfully!', 'Close', { duration: 2000 });
           },
           error: (error: any) => console.error('There was an error!', error)
         });

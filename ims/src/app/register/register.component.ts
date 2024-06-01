@@ -59,7 +59,7 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.httpService.postData('users', this.registerForm.value).subscribe({
       next: (data) => {
-        this.router.navigate(['/frontpage']);  
+        this.router.navigate(['/login']);  
         this.snackBar.open('Registration successful!', 'Close', {
           duration: 3000, 
         });
