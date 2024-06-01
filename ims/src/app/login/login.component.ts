@@ -13,6 +13,9 @@ import { AuthGuardService } from '../service/authGuard/auth-guard.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +26,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    MatFormFieldModule,
+    MatIconModule,
+    RouterLink,
     MatButtonModule
   ],
   templateUrl: './login.component.html',

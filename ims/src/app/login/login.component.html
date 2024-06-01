@@ -1,8 +1,13 @@
 <div class="form-container">
+    
     <div class="text-container">
+        <div fxLayout="column" fxLayoutGap="40px" fxLayoutAlign="start center" style="margin-bottom: 40px;">
+            <button mat-button routerLink="/"><mat-icon>arrow_back</mat-icon>Go Back</button>
+        </div> 
         <h2>Login</h2>
         <p>Please enter your email and password to login.</p>
     </div>
+    
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-field">
         <mat-form-field>
             <mat-label>Email</mat-label>
