@@ -87,19 +87,9 @@ export class DetailCollectionComponent{
   }
 
   createItem(): void {
-    const itemData: ItemsBase = {
-      name: this.itemName,
-      price: this.itemPrice,
-      amount: this.itemAmount,
-      type: this.itemType,
-      width: this.itemWidth,
-      height: this.itemHeight,
-      color: this.itemColor
-    };
-
     const dialogRef = this.dialog.open(CreateItemComponent, {
       width: '40%',
-      data: itemData
+      data: null
     });
 
     dialogRef.afterClosed().subscribe(result => {

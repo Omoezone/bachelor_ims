@@ -35,13 +35,13 @@ export class CreateItemComponent {
     private fb: FormBuilder
   ) {
     this.itemForm = this.fb.group({
-      name: [data.name, Validators.required],
-      price: [data.price, [Validators.required, Validators.min(1), Validators.max(1000000), Validators.pattern('^[0-9]*$')]],
-      amount: [data.amount, [Validators.required, Validators.min(1), Validators.max(1000), Validators.pattern('^[0-9]*$')]],
-      type: [data.type, Validators.required],
-      width: [data.width, [Validators.required, Validators.min(1), Validators.max(10000), Validators.pattern('^[0-9]*$')]],
-      height: [data.height, [Validators.required, Validators.min(1), Validators.max(10000), Validators.pattern('^[0-9]*$')]],
-      color: [data.color, Validators.required]
+      name: [data?.name ?? '', Validators.required],
+      price: [data?.price ?? null, [Validators.required, Validators.min(1), Validators.max(1000000), Validators.pattern('^[0-9]*$')]],
+      amount: [data?.amount ?? null, [Validators.required, Validators.min(1), Validators.max(1000), Validators.pattern('^[0-9]*$')]],
+      type: [data?.type ?? '', Validators.required],
+      width: [data?.width ?? null, [Validators.required, Validators.min(0), Validators.max(10000), Validators.pattern('^[0-9]*$')]],
+      height: [data?.height ?? null, [Validators.required, Validators.min(0), Validators.max(10000), Validators.pattern('^[0-9]*$')]],
+      color: [data?.color ?? '', Validators.required]
     });
   } 
 
