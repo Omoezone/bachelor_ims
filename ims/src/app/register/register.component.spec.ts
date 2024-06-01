@@ -112,7 +112,7 @@ describe('RegisterComponent', () => {
     expect(component.onSubmit).toHaveBeenCalled();
   });
 
-  it('should register successfully and navigate to frontpage', () => {
+  it('should register successfully and navigate to login', () => {
     const navigateSpy = spyOn(router, 'navigate');
     const registerResponse = { message: 'Registration successful' };
     spyOn(httpService, 'postData').and.returnValue(of(registerResponse));
@@ -126,7 +126,7 @@ describe('RegisterComponent', () => {
     component.onSubmit();
 
     expect(httpService.postData).toHaveBeenCalled();
-    expect(navigateSpy).toHaveBeenCalledWith(['/frontpage']);
+    expect(navigateSpy).toHaveBeenCalledWith(['/login']);
   });
   
 });
