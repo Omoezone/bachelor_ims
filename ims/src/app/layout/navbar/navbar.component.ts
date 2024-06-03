@@ -102,9 +102,15 @@ export class NavbarComponent {
             });
           },
           error: (error: any) => {
-            this.snackBar.open('Failed to create group, please try again later', 'Close', {
-              duration: 5000,
-            });
+            if (error.status === 404) {
+              this.snackBar.open('User not found, please use a valid user email', 'Close', {
+                duration: 3000,
+              });
+            } else {
+              this.snackBar.open('Internal error, please try again later', 'Close', {
+                duration: 5000,
+              });
+            }
           }
         });
       }
