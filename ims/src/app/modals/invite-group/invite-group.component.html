@@ -1,21 +1,25 @@
 <h2 mat-dialog-title>Create New Collection</h2>
 <mat-dialog-content>
-    <mat-form-field appearance="fill">
-        <mat-label>Email of user to invite</mat-label>
-        <input matInput [(ngModel)]="email">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Select Group</mat-label>
-        <mat-select [(value)]="selectedGroupId">
-            <mat-option *ngFor="let group of groups" [value]="group.groupId">
-                {{ group.groupName }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+    <form #groupForm="ngForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Email of user to invite</mat-label>
+            <input matInput [(ngModel)]="email" name="email" required>
+            <mat-error *ngIf="groupForm.controls['email'].errors?.['required'] && groupForm.submitted">Email is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Select Group</mat-label>
+            <mat-select [(ngModel)]="selectedGroupId" name="selectedGroupId" required>
+                <mat-option *ngFor="let group of groups" [value]="group.groupId">
+                    {{ group.groupName }}
+                </mat-option>
+            </mat-select> 
+            <mat-error *ngIf="groupForm.submitted && !selectedGroupId && selectedGroupId === null">Group selection is required</mat-error>
+        </mat-form-field>
+    </form>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button color="warn" (click)="onNoClick()">Cancel</button>
     <span class="spacer"></span>
-    <button mat-button color="primary" [mat-dialog-close]="{email: email, groupId: selectedGroupId}" cdkFocusInitial>Save</button>
+    <button mat-button color="primary" [disabled]="!groupForm.valid" (click)="onSaveClick(groupForm)" [mat-dialog-close]="{email: email, groupId: selectedGroupId}" cdkFocusInitial>Save</button>
 </mat-dialog-actions>
 
