@@ -25,13 +25,13 @@ export class InvitationNotificationsComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private http: HttpServiceService,
     private userService: UserService
-  ) {}
+  ) {
+  }
 
   acceptNotification(notification: any) {
-    console.log(notification)
     this.http.acceptInvite(`users/${this.userService.getUserId()}/acceptInvite`, { invToken: notification.invToken}).subscribe({
       next: (success) => {
-        this.userService.setUserGroups(success.groups);
+        this.userService.setUserGroups(success);
         this.removeNotification(notification);
       },
       error: (error) => {
