@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ItemsBase, Items } from '../../types/items';
+import { Items } from '../../types/items';
 import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';

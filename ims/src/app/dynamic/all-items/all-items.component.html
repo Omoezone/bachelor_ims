@@ -1,12 +1,14 @@
-<div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
-
-    <div fxLayout="row" fxLayoutGap="80px" fxLayoutAlign="center center" style="margin-bottom: 40px;">
+<div fxLayout="column" fxLayoutAlign="center center" fxFlexFill class="item-container">
+    <h1> Showing all your items </h1>
+    
+    <div fxLayout="row" fxLayoutGap="80px" fxLayoutAlign="center center" class="action-buttons">
         <button mat-button (click)="goBack()"><mat-icon>arrow_back</mat-icon>Go Back</button>
         <button mat-raised-button color="primary" (click)="exportCollection()">Export collection</button>
     </div>
 
-    <div style="width: 60%; max-width: 100%;">
+    <div class="table-container">
         <ng-container *ngIf="(dataSource?.data ?? []).length > 0; else noDataTemplate">
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
             <mat-table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
                 <ng-container matColumnDef="name">
