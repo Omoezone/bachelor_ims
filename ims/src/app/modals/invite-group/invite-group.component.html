@@ -4,7 +4,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Email of user to invite</mat-label>
             <input matInput [(ngModel)]="email" name="email" required>
-            <mat-error *ngIf="groupForm.controls['email'].errors?.['required'] && groupForm.submitted">Email is required</mat-error>
+            <mat-error *ngIf="groupForm.controls['email']?.errors?.['required'] && groupForm.submitted">Email is required</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Select Group</mat-label>
