@@ -6,6 +6,7 @@ export interface ItemsBase {
     width: number;
     height: number;
     color: string;
+    collectionId: number;
 }
 
 export interface Items extends ItemsBase {

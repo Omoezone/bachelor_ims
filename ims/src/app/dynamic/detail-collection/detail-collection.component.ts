@@ -137,6 +137,8 @@ export class DetailCollectionComponent{
   }
 
   updateItem(item: Items): void {
+    console.log("item: ", item);
+    console.log("collectionId: ", this.collectionId);
     const dialogRef = this.dialog.open(CreateItemComponent, {
       width: '40%',
       data: {
@@ -153,21 +155,21 @@ export class DetailCollectionComponent{
     });
     dialogRef.afterClosed().subscribe(result => {
         if (result) {
-            this.http.updateItem(`items/${item.itemId}`, result).subscribe({
-                next: (data: any) => {
-                  const index = this.dataSource.data.findIndex((i: any) => i.itemId === item.itemId);
-                  if (index !== -1) {
-                      this.dataSource.data[index] = result;
-                      this.dataSource.data = [...this.dataSource.data]; 
-                      this.snackBar.open('Item updated successful!', 'Close', {
-                        duration: 2000, 
-                      });
-                      this.dataSource.sort = this.sort;
-                      this.dataSource.paginator = this.paginator;
-                  }
-                },
-                error: (error: any) => console.error('There was an error!', error)
-            });
+          this.http.updateItem(`items/${item.itemId}`, result).subscribe({
+              next: (data: any) => {
+                const index = this.dataSource.data.findIndex((i: any) => i.itemId === item.itemId);
+                if (index !== -1) {
+                    this.dataSource.data[index] = result;
+                    this.dataSource.data = [...this.dataSource.data]; 
+                    this.snackBar.open('Item updated successful!', 'Close', {
+                      duration: 2000, 
+                    });
+                    this.dataSource.sort = this.sort;
+                    this.dataSource.paginator = this.paginator;
+                }
+              },
+              error: (error: any) => console.error('There was an error!', error)
+          });
         }
     });
   }

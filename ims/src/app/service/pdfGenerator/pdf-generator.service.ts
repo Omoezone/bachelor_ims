@@ -9,7 +9,7 @@ export class PdfGeneratorService {
   constructor() {}
   async generatePDF(content: any): Promise<void> {
     const pdfDoc = await PDFDocument.create();
-    const maxRowsPerPage = 20; // Max rows per page
+    const maxRowsPerPage = 20; 
 
     // Function to create a new page and return it
     const createPage = () => {
@@ -32,7 +32,7 @@ export class PdfGeneratorService {
     // Headers
     const headers = ['Name', 'Price', 'Type', 'Dimensions', 'Color', 'Amount'];
 
-    // Function to draw headers
+    // Function to draw headers as squares
     const drawHeaders = (page: any, startY: any) => {
       for (let i = 0; i < headers.length; i++) {
         page.drawText(headers[i], {
@@ -52,7 +52,7 @@ export class PdfGeneratorService {
       item.name,
       item.price || 'No value set',
       item.type,
-      (item.width && item.height) ? item.width + ' x ' + item.height : 'No dimensions set',
+      (item.width && item.height) ? (item.width + ' x ' + item.height) : (item.width || item.height) || 'No dimensions set',
       item.color || 'No color set',
       item.amount
     ]);

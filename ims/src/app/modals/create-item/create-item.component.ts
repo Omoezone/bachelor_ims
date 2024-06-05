@@ -41,7 +41,8 @@ export class CreateItemComponent {
       type: [data?.type ?? '', Validators.required],
       width: [data?.width ?? null, [Validators.required, Validators.min(0), Validators.max(10000), Validators.pattern('^[0-9]*$')]],
       height: [data?.height ?? null, [Validators.required, Validators.min(0), Validators.max(10000), Validators.pattern('^[0-9]*$')]],
-      color: [data?.color ?? '', Validators.required]
+      color: [data?.color ?? '', Validators.required],
+      collectionId: [data?.collectionId ?? ''] 
     });
   } 
 

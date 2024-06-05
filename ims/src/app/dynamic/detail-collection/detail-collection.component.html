@@ -30,7 +30,7 @@
                 <ng-container matColumnDef="dimensions">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Dimensions (WxH) </th>
                     <td mat-cell *matCellDef="let element">   
-                        {{ (element.width && element.height) ? (element.width + ' x ' + element.height) : 'No dimensions set' }}
+                        {{ element.width && element.height ? (element.width + ' x ' + element.height) : (element.width || element.height) || 'No dimensions set' }}
                     </td>
                 </ng-container>
 
