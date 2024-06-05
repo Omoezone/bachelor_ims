@@ -1,34 +1,23 @@
-<mat-grid-list cols="2" rowHeight="2:1">
-    <mat-grid-tile [colspan]="2" [rowspan]="1" class="backgroundImage"> 
-    </mat-grid-tile>    
-    <mat-grid-tile [colspan]="2" [rowspan]="2"> 
-        <div class='internalMatGrid' >    
-            <mat-grid-list cols="2" rowHeight="1:1"> 
-                <mat-grid-tile [colspan]="1" [rowspan]="1" class="tileDesign"> 
-                    <h2>Management made easy</h2>
-                    <p> Efficiently manage your inventory with this inventory management 
-                        service. Our intuitive platform offers seamless integration, 
-                        allowing you to track items across multiple locations, owners and collections.
-                        A must have for both business and personal tracking, usefull for insurance, asset mangement and much more. 
-                        Join us today for free!</p>
-                </mat-grid-tile> 
-                <mat-grid-tile [colspan]="1" [rowspan]="1" class="tileDesign"> 
-                    <h2>Benefits</h2>
-                    <mat-list>
-                        <h3 mat-subheader>Organisation</h3>
-                        <mat-list-item *ngFor="let org of organisations">
-                          <mat-icon mat-list-icon>assessment</mat-icon>
-                          <h4 mat-line>{{org.name}}</h4>
-                        </mat-list-item>
-                        <mat-divider></mat-divider>
-                        <h3 mat-subheader>Personal</h3>
-                        <mat-list-item *ngFor="let person of personal">
-                          <mat-icon mat-list-icon>assignment_ind</mat-icon>
-                          <h4 mat-line>{{person.name}}</h4>
-                        </mat-list-item>
-                    </mat-list>
-                </mat-grid-tile>
-            </mat-grid-list>
-        </div>
-    </mat-grid-tile>   
-</mat-grid-list>
+<div class="container">
+    <div>
+        <h1>How to work the system</h1>
+        <ul>
+            <hr>
+            <li>Step 1: Add collection or use an existing one</li>
+            <li>Step 2: Either add, edit or delete items</li>
+            <li>Step 3: Click on the "Delete" button to delete an existing item</li>
+            <hr>
+        </ul>
+    </div>
+    <div>
+        <h1>Extra</h1>
+        <ul>
+            <hr>
+            <li>Create a new group</li>
+            <li>Invite other users to your group</li>
+            <li>Accept/Deny invitation from other users</li>
+            <li>Export items to pdf</li>
+            <hr>
+        </ul>
+    </div>
+</div>

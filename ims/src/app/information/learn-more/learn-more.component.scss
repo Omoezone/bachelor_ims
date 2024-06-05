@@ -1,21 +1,11 @@
-mat-grid-tile {
-    background: #673ab7;
+:host {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 }
-
-.internalMatGrid{  
-    min-width:80%;
-    background: lightpink;
-    opacity: 40%;
-}
-
-.tileDesign {
-    background: lightpink;
-}
-.backgroundImage{
-    background: #673ab7;
-    background-image: url('../../../assets/bannerLearnMore.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center; 
-    width: 100%;
+.container {
+    margin: 80px;
+    padding: 20px;
 }
