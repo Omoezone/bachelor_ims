@@ -11,7 +11,6 @@ export class HttpServiceService {
   constructor(
     private http: HttpClient  
   ) {
-    console.log("service baseUrl: ", this.baseUrl);
   }
 
   // USER
