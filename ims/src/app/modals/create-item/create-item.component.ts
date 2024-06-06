@@ -35,13 +35,13 @@ export class CreateItemComponent {
     private fb: FormBuilder
   ) {
     this.itemForm = this.fb.group({
-      name: [data?.name ?? '', Validators.required],
-      price: [data?.price ?? null, [Validators.required, Validators.min(1), Validators.max(1000000), Validators.pattern('^[0-9]*$')]],
+      name: [data?.name ?? '', [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$'),Validators.maxLength(45)]],
+      price: [data?.price ?? null, [Validators.max(1000000), Validators.pattern('^[0-9]*$')]],
       amount: [data?.amount ?? null, [Validators.required, Validators.min(1), Validators.max(1000), Validators.pattern('^[0-9]*$')]],
-      type: [data?.type ?? '', Validators.required],
-      width: [data?.width ?? null, [Validators.required, Validators.min(0), Validators.max(10000), Validators.pattern('^[0-9]*$')]],
-      height: [data?.height ?? null, [Validators.required, Validators.min(0), Validators.max(10000), Validators.pattern('^[0-9]*$')]],
-      color: [data?.color ?? '', Validators.required],
+      type: [data?.type ?? '', [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$'),Validators.maxLength(45)]],
+      width: [data?.width ?? null, [Validators.max(10000), Validators.pattern('^[0-9]*$')]],
+      height: [data?.height ?? null, [Validators.max(10000), Validators.pattern('^[0-9]*$')]],
+      color: [data?.color ?? '', [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$'),Validators.maxLength(45)]],
       collectionId: [data?.collectionId ?? ''] 
     });
   } 
@@ -52,7 +52,19 @@ export class CreateItemComponent {
   
   onSaveClick(): void {
     if (this.itemForm.valid) {
-      this.dialogRef.close(this.itemForm.value);
+      const formValues = this.itemForm.value;
+      const item = {
+        itemId: this.data?.itemId,
+        name: formValues.name,
+        price: formValues.price || 1,
+        amount: formValues.amount,
+        type: formValues.type,
+        width: formValues.width || 0,
+        height: formValues.height || 0,
+        color: formValues.color,
+        collectionId: formValues.collectionId
+      };
+      this.dialogRef.close(item);
     } else {
       this.itemForm.markAllAsTouched();
     }
