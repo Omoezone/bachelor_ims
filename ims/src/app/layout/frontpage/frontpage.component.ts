@@ -24,7 +24,6 @@ export class FrontpageComponent {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private http: HttpServiceService
   ) {}
   isLoggedIn: boolean = false;
 
