@@ -3,8 +3,15 @@
         <div class="content">
             <h1>Welcome to IMS</h1>
             <p>Explore our inventory management solutions and enhance your business and personal operations.</p>
-            <button mat-raised-button color="accent" routerLink="/learnMore">Learn More</button>
-            <button mat-raised-button color="primary" routerLink="/register">Get Started</button>
-        </div>
+            <ng-container *ngIf="!isLoggedIn; else loggedInBlock">
+                <button mat-raised-button color="accent" routerLink="/learnMore">Learn More</button>
+                <button mat-raised-button color="primary" routerLink="/login">Login</button>
+                <button mat-raised-button color="primary" routerLink="/register">Register</button>
+            </ng-container>
+            <ng-template #loggedInBlock>
+                <button mat-raised-button color="accent" routerLink="/learnMore">Learn More</button>
+                <button mat-raised-button color="primary" routerLink="/userFrontPage">Collections</button>
+            </ng-template>
+        </div> 
     </div>
 </div>

@@ -34,7 +34,6 @@ export class HttpServiceService {
   // AUTH
   login(url: string, email: string, password: string): Observable<any> {
     const loginData = { email, password };
-    console.log("loginData: ", loginData)
     return this.http.post(`${this.baseUrl}/api/auth/${url}`, loginData).pipe(
       catchError(this.handleError) 
     );  

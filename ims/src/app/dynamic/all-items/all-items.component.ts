@@ -17,7 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-all-items',
-  standalone: true,
+  standalone: true, 
   imports: [
     MatTableModule,
     MatButtonModule,
