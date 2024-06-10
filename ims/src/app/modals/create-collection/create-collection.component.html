@@ -3,8 +3,9 @@
   <form #collectionForm="ngForm">
     <mat-form-field appearance="fill">
       <mat-label>Collection Name</mat-label>
-      <input matInput [(ngModel)]="collectionName" name="collectionName" required>
+      <input matInput [(ngModel)]="collectionName" name="collectionName" required maxlength="40">
       <mat-error *ngIf="collectionForm.submitted && !collectionName">Collection Name is required</mat-error>
+      <mat-error *ngIf="collectionName && collectionName.length > 40">Collection Name must be under 40 characters</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Select Group</mat-label>

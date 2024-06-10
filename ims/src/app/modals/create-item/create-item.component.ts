@@ -35,13 +35,13 @@ export class CreateItemComponent {
     private fb: FormBuilder
   ) {
     this.itemForm = this.fb.group({
-      name: [data?.name ?? '', [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$'),Validators.maxLength(45)]],
-      price: [data?.price ?? null, [Validators.max(1000000), Validators.pattern('^[0-9]*$')]],
+      name: [data?.name ?? '', [Validators.required, Validators.maxLength(40)]],
+      price: [data?.price ?? null, [Validators.max(1000000)]],
       amount: [data?.amount ?? null, [Validators.required, Validators.min(1), Validators.max(1000), Validators.pattern('^[0-9]*$')]],
-      type: [data?.type ?? '', [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$'),Validators.maxLength(45)]],
+      type: [data?.type ?? '', [Validators.required, Validators.maxLength(40)]],
       width: [data?.width ?? null, [Validators.max(10000), Validators.pattern('^[0-9]*$')]],
       height: [data?.height ?? null, [Validators.max(10000), Validators.pattern('^[0-9]*$')]],
-      color: [data?.color ?? '', [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$'),Validators.maxLength(45)]],
+      color: [data?.color ?? '', [Validators.required, Validators.maxLength(40)]],
       collectionId: [data?.collectionId ?? ''] 
     });
   } 
