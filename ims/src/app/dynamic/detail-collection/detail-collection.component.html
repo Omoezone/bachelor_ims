@@ -9,7 +9,9 @@
 
     <div class="table-container">
         <ng-container *ngIf="(dataSource?.data ?? []).length > 0; else noDataTemplate">
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+            <div class="paginator-container">
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+            </div>            
             <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;">
 
                 <ng-container matColumnDef="name">
@@ -28,7 +30,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="dimensions">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Dimensions (WxH) </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Dimensions </th>
                     <td mat-cell *matCellDef="let element">   
                         {{ element.width && element.height ? (element.width + ' x ' + element.height) : (element.width || element.height) || 'No dimensions set' }}
                     </td>

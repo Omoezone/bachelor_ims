@@ -15,12 +15,18 @@
 }
 
 .table-container {
-    width: 60%;
+    width: 75%;
     max-width: 100%;
     margin-bottom: 20px; 
     padding-bottom: 20px; 
 }
 
-.mat-paginator {
+.table-container th.mat-header-cell, .table-container td.mat-cell {
+    text-align: center;
+}
+
+.paginator-container {
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
 }
